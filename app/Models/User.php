@@ -24,6 +24,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'email',
         'password',
+        'phone_number',
+        'position',
+        'birthdate',
+        'account_type',
+        'gender',
     ];
 
     /**
@@ -44,4 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function getNameattribute() {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }

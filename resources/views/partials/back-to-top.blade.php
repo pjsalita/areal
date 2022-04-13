@@ -4,3 +4,7 @@
         BACK TO TOP
     </button>
 </div>
+
+@push('scripts')
+    <script src="{{ asset('assets/js/scrollup.js') }}"></script>
+@endpush

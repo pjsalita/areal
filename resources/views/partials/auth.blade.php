@@ -27,10 +27,10 @@
                                     <input id="login-password" name="password" type="password" required>
                                 </div>
                                 <div class="input-block text-center">
-                                    <label id="login-error" class="text-danger"></label>
+                                    <label id="login-error" class="!text-red-400"></label>
                                 </div>
                             </fieldset>
-                            <button type="submit" class="action primary btn-login">LOGIN</button>
+                            <button id="login-submit" type="submit" class="action primary btn-login">LOGIN</button>
                         </div>
                     </form>
                 </div>
@@ -49,23 +49,23 @@
                                 <div class="column -first">
                                     <div class="input-block">
                                         <label for="signup-first-name">FIRST NAME</label>
-                                        <input id="signup-first-name" name="first_name" type="text" required>
+                                        <input id="signup-first-name" name="first_name" type="text" tabindex="1" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-birthday">BIRTHDAY</label>
-                                        <input id="signup-birthday" name="birthdate" type="date" required>
+                                        <input id="signup-birthday" name="birthdate" type="date" tabindex="3" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-email">EMAIL</label>
-                                        <input id="signup-email" name="email" type="email" required>
+                                        <input id="signup-email" name="email" type="email" tabindex="5" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-password">PASSWORD</label>
-                                        <input id="signup-password" name="password" type="password" required>
+                                        <input id="signup-password" name="password" type="password" tabindex="7" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-type">ACCOUNT TYPE</label>
-                                        <select id="signup-type" name="account_type">
+                                        <select id="signup-type" name="account_type" tabindex="9">
                                             <option value="" disabled selected>SELECT ACCOUNT TYPE</option>
                                             <option value="client">CLIENT</option>
                                             <option value="architect">ARCHITECT</option>
@@ -75,11 +75,11 @@
                                 <div class="column -second">
                                     <div class="input-block">
                                         <label for="signup-last-name">LAST NAME</label>
-                                        <input id="signup-last-name" name="last_name" type="text" required>
+                                        <input id="signup-last-name" name="last_name" type="text" tabindex="2" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-gender">GENDER</label>
-                                        <select id="signup-gender" name="gender" placeholder="SELECT GENDER">
+                                        <select id="signup-gender" name="gender" placeholder="SELECT GENDER" tabindex="4">
                                             <option value="" disabled selected>SELECT GENDER</option>
                                             <option value="male">MALE</option>
                                             <option value="female">FEMALE</option>
@@ -87,23 +87,23 @@
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-number">PHONE NUMBER</label>
-                                        <input id="signup-number" name="phone_number" type="text" required>
+                                        <input id="signup-number" name="phone_number" type="text" tabindex="6" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-password-confirm">CONFIRM PASSWORD</label>
-                                        <input id="signup-password-confirm" name="password_confirmation" type="password" required>
+                                        <input id="signup-password-confirm" name="password_confirmation" type="password" tabindex="8" required>
                                     </div>
                                     <div class="input-block">
                                         <label for="signup-position">POSITION</label>
-                                        <input id="signup-position" name="position" type="text">
+                                        <input id="signup-position" name="position" type="text" tabindex="10">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-block text-center">
-                                <label id="register-error" class="text-danger"></label>
+                                <label id="register-error" class="!text-red-400"></label>
                             </div>
                         </fieldset>
-                        <button type="submit" class="action secondary">SIGN UP</button>
+                        <button id="register-submit" type="submit" class="action secondary" tabindex="11">SIGN UP</button>
                     </form>
                 </div>
             </div>
@@ -114,24 +114,30 @@
 
 @push('scripts')
     @guest
+        <script src="{{ asset('assets/js/sign-in.js') }}"></script>
         <script>
             async function login(e) {
                 e.preventDefault();
                 const formData = new FormData(e.target);
                 const formValues = Object.fromEntries(formData);
-                const loginError = document.getElementById("login-error");
+                const errorLabel = document.getElementById("login-error");
+                const submitButton = document.getElementById("login-submit");
 
                 try {
-                    loginError.innerText = "";
+                    errorLabel.innerText = "";
+                    submitButton.disabled = true;
                     const { data } = await axios.post("/login", formValues);
 
                     if (data.success) {
                         window.location.href = "/dashboard";
                     }
+
+                    submitButton.disabled = false;
                 } catch (error) {
                     const errorData = error?.response?.data;
                     const errorMessage = errorData?.errors ? Object.values(errorData?.errors).flat().join('\n') : error?.response?.data?.message || error.message;
-                    loginError.innerText = errorMessage;
+                    errorLabel.innerText = errorMessage;
+                    submitButton.disabled = false;
                 }
             }
 
@@ -139,10 +145,11 @@
                 e.preventDefault();
                 const formData = new FormData(e.target);
                 const formValues = Object.fromEntries(formData);
-                const registerError = document.getElementById("register-error");
+                const errorLabel = document.getElementById("register-error");
+                const submitButton = document.getElementById("register-submit");
 
                 try {
-                    registerError.innerText = "";
+                    errorLabel.innerText = "";
                     const { data } = await axios.post("/register", formValues);
 
                     if (data.success) {
@@ -151,7 +158,7 @@
                 } catch (error) {
                     const errorData = error?.response?.data;
                     const errorMessage = errorData?.errors ? Object.values(errorData?.errors).flat().join('\n') : error?.response?.data?.message || error.message;
-                    registerError.innerText = errorMessage;
+                    errorLabel.innerText = errorMessage;
                 }
             }
         </script>

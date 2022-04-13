@@ -526,11 +526,6 @@ a:hover {
 .direct-chat-text::after,
 .direct-chat-text::before {
   border-color: transparent #6b969d transparent transparent;
-}
-
-.direct-chat-text::after,
-.direct-chat-text::before {
-  border-color: transparent #6b969d transparent transparent;
   -o-border-image: none;
      border-image: none;
   border-style: solid;

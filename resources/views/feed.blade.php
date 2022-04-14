@@ -1,17 +1,24 @@
 @section('title', Str::ucfirst((auth()->user()->account_type)) . " Feed")
 
 <x-app-layout>
-    <div class="container-fluid gedf-wrapper my-3">
+    <div class="my-3 container-fluid gedf-wrapper">
         <div class="row">
             <div class="col-md-3">
-                @include('partials.feed.profile')
+                @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
-            <div class="col-md-6 gedf-main">
+            <div class="col-md-{{ auth()->user()->account_type === "architect" ? "9" : "6" }} gedf-main">
+                @architect
+                    @include('partials.feed.create-post')
+                @endarchitect
+
                 @include('partials.feed.post')
             </div>
-            <div class="col-md-3">
-                @include('partials.feed.architect')
-            </div>
+
+            @client
+                <div class="col-md-3">
+                    @include('partials.feed.architect')
+                </div>
+            @endclient
         </div>
     </div>
 
@@ -34,7 +41,7 @@
                     <abbr class="timestamp">October 8th, 2015</abbr>
                 </div>
                 <div class="direct-chat-msg doted-border">
-                    <div class="direct-chat-info clearfix">
+                    <div class="clearfix direct-chat-info">
                         <span class="direct-chat-name pull-left">Osahan</span>
                     </div>
                     <img alt="message user image"
@@ -43,10 +50,10 @@
                     <div class="direct-chat-text">
                         Hey bro, how’s everything going ?
                     </div>
-                    <div class="direct-chat-info clearfix">
+                    <div class="clearfix direct-chat-info">
                         <span class="direct-chat-timestamp pull-right">3.36 PM</span>
                     </div>
-                    <div class="direct-chat-info clearfix">
+                    <div class="clearfix direct-chat-info">
                         <span class="direct-chat-img-reply-small pull-left">
 
                         </span>
@@ -58,7 +65,7 @@
                     <abbr class="timestamp">October 9th, 2015</abbr>
                 </div>
                 <div class="direct-chat-msg doted-border">
-                    <div class="direct-chat-info clearfix">
+                    <div class="clearfix direct-chat-info">
                         <span class="direct-chat-name pull-left">Osahan</span>
                     </div>
                     <img alt="iamgurdeeposahan"
@@ -67,10 +74,10 @@
                     <div class="direct-chat-text">
                         Hey bro, how’s everything going ?
                     </div>
-                    <div class="direct-chat-info clearfix">
+                    <div class="clearfix direct-chat-info">
                         <span class="direct-chat-timestamp pull-right">3.36 PM</span>
                     </div>
-                    <div class="direct-chat-info clearfix">
+                    <div class="clearfix direct-chat-info">
                         <img alt="iamgurdeeposahan"
                             src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg"
                             class="direct-chat-img big-round">

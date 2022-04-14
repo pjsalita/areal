@@ -26,7 +26,7 @@
                                     <label for="login-password">PASSWORD</label>
                                     <input id="login-password" name="password" type="password" required>
                                 </div>
-                                <div class="input-block text-center">
+                                <div class="text-center input-block">
                                     <label id="login-error" class="!text-red-400"></label>
                                 </div>
                             </fieldset>
@@ -93,13 +93,13 @@
                                         <label for="signup-password-confirm">CONFIRM PASSWORD</label>
                                         <input id="signup-password-confirm" name="password_confirmation" type="password" tabindex="8" required>
                                     </div>
-                                    <div class="input-block">
+                                    <div id="signup-position-block" class="input-block" style="display: none">
                                         <label for="signup-position">POSITION</label>
                                         <input id="signup-position" name="position" type="text" tabindex="10">
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-block text-center">
+                            <div class="text-center input-block">
                                 <label id="register-error" class="!text-red-400"></label>
                             </div>
                         </fieldset>
@@ -115,52 +115,5 @@
 @push('scripts')
     @guest
         <script src="{{ asset('assets/js/sign-in.js') }}"></script>
-        <script>
-            async function login(e) {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                const formValues = Object.fromEntries(formData);
-                const errorLabel = document.getElementById("login-error");
-                const submitButton = document.getElementById("login-submit");
-
-                try {
-                    errorLabel.innerText = "";
-                    submitButton.disabled = true;
-                    const { data } = await axios.post("/login", formValues);
-
-                    if (data.success) {
-                        window.location.href = "/dashboard";
-                    }
-
-                    submitButton.disabled = false;
-                } catch (error) {
-                    const errorData = error?.response?.data;
-                    const errorMessage = errorData?.errors ? Object.values(errorData?.errors).flat().join('\n') : error?.response?.data?.message || error.message;
-                    errorLabel.innerText = errorMessage;
-                    submitButton.disabled = false;
-                }
-            }
-
-            async function register(e) {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                const formValues = Object.fromEntries(formData);
-                const errorLabel = document.getElementById("register-error");
-                const submitButton = document.getElementById("register-submit");
-
-                try {
-                    errorLabel.innerText = "";
-                    const { data } = await axios.post("/register", formValues);
-
-                    if (data.success) {
-                        window.location.href = "/dashboard";
-                    }
-                } catch (error) {
-                    const errorData = error?.response?.data;
-                    const errorMessage = errorData?.errors ? Object.values(errorData?.errors).flat().join('\n') : error?.response?.data?.message || error.message;
-                    errorLabel.innerText = errorMessage;
-                }
-            }
-        </script>
     @endguest
 @endpush

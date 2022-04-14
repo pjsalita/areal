@@ -5,7 +5,7 @@
             <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>@yield('title', 'Home') || AReal : Augmented Reality 2D Floor Plan Scanner</title>
-        <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset("icon.svg") }}" type="image/x-icon">
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href={{ asset('assets/css/aos.css') }} />

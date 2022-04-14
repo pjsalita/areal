@@ -1,4 +1,4 @@
-<div class="card gedf-card my-2">
+<div class="mb-2 card gedf-card">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
@@ -6,7 +6,7 @@
                     <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                 </div>
                 <div class="ml-2">
-                    <div class="h5 m-0">Aeron Kinemerut</div>
+                    <div class="m-0 h5">Aeron Kinemerut</div>
                     <div class="h7 text-muted">Interior Designer</div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
 
     </div>
     <div class="card-body">
-        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+        <div class="mb-2 text-muted h7"> <i class="fa fa-clock-o"></i>10 min ago</div>
         <a class="card-link" href="#">
             <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
         </a>

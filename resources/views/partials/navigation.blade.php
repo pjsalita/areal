@@ -33,7 +33,7 @@
                 </li>
                 <li class="links">
                     @auth
-                        <a href="/dashboard" class="anchor">MY FEED</a>
+                        <a href="/feed" class="anchor">MY FEED</a>
                     @else
                         <a href="javascript:void(0)" data-link="log-in" class="anchor">LOG IN</a>
                     @endauth

@@ -4,6 +4,10 @@
             class="img-thumbnail">
         <div class="mt-2 mb-0 h5">
             <a href="{{ route('profile.view', $user->id) }}">{{ $user->name }}</a>
+
+            @if($user->hasVerifiedEmail())
+                <i class="fa fa-check-circle"></i>
+            @endif
         </div>
         <div class="text-capitalize h6">{{ $user->position }}</div>
 

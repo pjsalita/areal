@@ -7,7 +7,9 @@
                 @include('partials.feed.profile', [ 'user' => $user ])
             </div>
             <div class="col-md-9 gedf-main">
-                @include('partials.feed.post')
+                @foreach ($user->posts as $post)
+                    @include('partials.feed.post', [ 'user' => $post->user, 'post' => $post ])
+                @endforeach
             </div>
         </div>
     </div>

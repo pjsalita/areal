@@ -35,7 +35,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
+
+        return redirect()->back();
     }
 
     /**

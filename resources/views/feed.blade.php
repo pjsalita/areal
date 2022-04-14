@@ -11,7 +11,9 @@
                     @include('partials.feed.create-post')
                 @endarchitect
 
-                @include('partials.feed.post')
+                @foreach ($posts as $post)
+                    @include('partials.feed.post', [ 'user' => $post->user, 'post' => $post ])
+                @endforeach
             </div>
 
             @client

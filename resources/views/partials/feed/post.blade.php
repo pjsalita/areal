@@ -6,27 +6,33 @@
                     <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                 </div>
                 <div class="ml-2">
-                    <div class="m-0 h5">Aeron Kinemerut</div>
-                    <div class="h7 text-muted">Interior Designer</div>
+                    <div class="m-0 h5">
+                        <a href="{{ route('profile.view', $user->id) }}">{{ $user->name }}</a>
+                    </div>
+
+                    <div class="h7 text-muted text-capitalize">{{ $user->position }}</div>
                 </div>
             </div>
         </div>
 
     </div>
     <div class="card-body">
-        <div class="mb-2 text-muted h7"> <i class="fa fa-clock-o"></i>10 min ago</div>
+        <div class="mb-2 text-muted h7"> <i class="fa fa-clock-o"></i> {{ $post->created_at->diffForHumans() }}</div>
         <a class="card-link" href="#">
-            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+            <h5 class="card-title">{{ $post->title }}</h5>
         </a>
 
-        <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa
-            praesentium esse magnam nemo dolor
-            sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-        </p>
+        <p class="card-text">{{ $post->body }}</p>
     </div>
-    <div class="card-footer">
-        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-    </div>
+
+    @verified
+        <div class="card-footer">
+            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+        </div>
+    @else
+        <div class="card-footer">
+            <small>Verify your email address to like and comment.</small>
+        </div>
+    @endverified
 </div>

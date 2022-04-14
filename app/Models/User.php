@@ -52,12 +52,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    protected function getNameattribute() {
+    public function getNameAttribute() {
         return "{$this->first_name} {$this->last_name}";
     }
 
     public function posts()
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
+    }
+
+    public function getProfilePhotoAttribute()
+    {
+        $initials = "{$this->first_name[0]}+{$this->last_name[0]}";
+        $background = $this->gender === "male" ? "4AD2F2" : "FD8DAD";
+        return "https://ui-avatars.com/api/?name={$initials}&color=fff&background={$background}";
     }
 }

@@ -3,14 +3,14 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="mr-2">
-                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                    <img class="rounded-circle" width="45" src="{{  $post->user->profile_photo }}" alt="">
                 </div>
                 <div class="ml-2">
                     <div class="m-0 h5">
-                        <a href="{{ route('profile.view', $user->id) }}">{{ $user->name }}</a>
+                        <a href="{{ route('profile.view', $post->user->id) }}">{{ $post->user->name }}</a>
                     </div>
 
-                    <div class="h7 text-muted text-capitalize">{{ $user->position }}</div>
+                    <div class="h7 text-muted text-capitalize">{{ $post->user->position }}</div>
                 </div>
             </div>
         </div>

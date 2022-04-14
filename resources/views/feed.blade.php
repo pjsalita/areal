@@ -12,7 +12,7 @@
                 @endarchitect
 
                 @foreach ($posts as $post)
-                    @include('partials.feed.post', [ 'user' => $post->user, 'post' => $post ])
+                    @include('partials.feed.post', [ 'post' => $post ])
                 @endforeach
             </div>
 

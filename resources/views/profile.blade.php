@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-9 gedf-main">
                 @foreach ($user->posts as $post)
-                    @include('partials.feed.post', [ 'user' => $post->user, 'post' => $post ])
+                    @include('partials.feed.post', [ 'post' => $post ])
                 @endforeach
             </div>
         </div>

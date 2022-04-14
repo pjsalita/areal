@@ -1,7 +1,7 @@
 <div class="mb-2 card">
     <div class="card-body">
-        <img src="https://www.perfectpassportphotos.com/img/img_placeholder_avatar.jpg" alt="..."
-            class="img-thumbnail">
+        <img src="{{ $user->profile_photo }}" alt="..."
+            class="img-thumbnail w-100">
         <div class="mt-2 mb-0 h5">
             <a href="{{ route('profile.view', $user->id) }}">{{ $user->name }}</a>
 

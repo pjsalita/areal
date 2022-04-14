@@ -11,8 +11,20 @@
                     </div>
 
                     <div class="h7 text-muted text-capitalize">{{ $post->user->position }}</div>
+
                 </div>
             </div>
+
+            @self($post->user->id)
+                <div class="float-right">
+                    <form action="{{ route("post.destroy", $post->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn text-danger btn-link">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            @endself
         </div>
 
     </div>

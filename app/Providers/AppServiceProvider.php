@@ -30,23 +30,27 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Blade::if('architect', function () {
-            return auth()->user()->account_type === 'architect';
+            return optional(auth()->user())->account_type === 'architect';
         });
 
         Blade::if('client', function () {
-            return auth()->user()->account_type === 'client';
+            return optional(auth()->user())->account_type === 'client';
         });
 
         Blade::if('admin', function () {
-            return auth()->user()->account_type === 'admin';
+            return optional(auth()->user())->account_type === 'admin';
         });
 
         Blade::if('self', function ($id) {
-            return auth()->id() === $id;
+            return $id && auth()->id() === $id;
         });
 
         Blade::if('verified', function () {
             return optional(auth()->user())->hasVerifiedEmail();
+        });
+
+        Blade::if('unverified', function () {
+            return !optional(auth()->user())->hasVerifiedEmail();
         });
     }
 }

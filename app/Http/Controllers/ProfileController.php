@@ -14,7 +14,7 @@ class ProfileController extends Controller
         return view('profile', compact('user'));
     }
 
-    public function get(User $user)
+    public function show(User $user)
     {
         return view('profile', compact('user'));
     }

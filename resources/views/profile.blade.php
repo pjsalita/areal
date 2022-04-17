@@ -6,10 +6,14 @@
             <div class="col-md-3">
                 @include('partials.feed.profile', [ 'user' => $user ])
             </div>
-            <div class="col-md-9 gedf-main">
-                @foreach ($user->posts as $post)
+            <div class="col-md-9">
+                @forelse ($user->posts as $post)
                     @include('partials.feed.post', [ 'post' => $post ])
-                @endforeach
+                @empty
+                <div class="text-center">
+                    <p>No posts available.</p>
+                </div>
+                @endforelse
             </div>
         </div>
     </div>

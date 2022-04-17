@@ -3,7 +3,7 @@
         <img src="{{ $user->profile_photo }}" alt="..."
             class="img-thumbnail w-100">
         <div class="mt-2 mb-0 h5">
-            <a href="{{ route('profile.view', $user->id) }}">{{ $user->name }}</a>
+            <a href="{{ route('profile.show', $user->id) }}">{{ $user->name }}</a>
 
             @if($user->hasVerifiedEmail())
                 <i class="fa fa-check-circle"></i>

@@ -6,14 +6,18 @@
             <div class="col-md-3">
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
-            <div class="col-md-{{ auth()->user()->account_type === "architect" ? "9" : "6" }} gedf-main">
+            <div class="col-md-{{ auth()->user()->account_type === "architect" ? "9" : "6" }}">
                 @architect
                     @include('partials.feed.create-post')
                 @endarchitect
 
-                @foreach ($posts as $post)
+                @forelse ($posts as $post)
                     @include('partials.feed.post', [ 'post' => $post ])
-                @endforeach
+                @empty
+                <div class="text-center">
+                    <p>No posts available.</p>
+                </div>
+                @endforelse
             </div>
 
             @client

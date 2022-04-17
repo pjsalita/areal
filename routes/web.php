@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +24,19 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/{user}', [ProfileController::class, 'get'])->name('profile.view');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
+    Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
-    Route::post('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+
+    Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+    Route::post('/like', [LikeController::class, 'like'])->name('like');
+    Route::delete('/like', [LikeController::class, 'unlike'])->name('like');
 });
 
 require __DIR__.'/auth.php';

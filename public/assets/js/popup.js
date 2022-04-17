@@ -1,9 +1,10 @@
 $(function(){
-    $("#addClass").click(function () {
-              $('#qnimate').addClass('popup-box-on');
-                });
+    $("#openChat").click(function () {
+        $('#chatbox').addClass('popup-box-on');
+    });
 
-                $("#removeClass").click(function () {
-              $('#qnimate').removeClass('popup-box-on');
-                });
-      })
+        $("#closeChat").click(function () {
+        $('#chatbox').removeClass('popup-box-on');
+    });
+})
+

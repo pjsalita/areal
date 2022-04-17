@@ -14,15 +14,25 @@
                 @forelse ($posts as $post)
                     @include('partials.feed.post', [ 'post' => $post ])
                 @empty
-                <div class="text-center">
-                    <p>No posts available.</p>
-                </div>
+                    <div class="text-center">
+                        <p>No posts available.</p>
+                    </div>
                 @endforelse
             </div>
 
             @client
                 <div class="col-md-3">
-                    @include('partials.feed.architect')
+                    <div class="card mb-1">
+                        <div class="card-header border-bottom-0">Available Architects</div>
+                    </div>
+
+                    @forelse ($architects as $architect)
+                        @include('partials.feed.architect', [ 'architect' => $architect ])
+                    @empty
+                        <div class="text-center">
+                            <p>No architects available.</p>
+                        </div>
+                    @endforelse
                 </div>
             @endclient
         </div>
@@ -31,13 +41,13 @@
     @include('partials.feed.booking')
 
     <!-- Markup for Chat -->
-    <div class="popup-box chat-popup" id="qnimate">
+    <div class="popup-box chat-popup" id="chatbox">
         <div class="popup-head">
             <div class="popup-head-left pull-left"><img
                     src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg"
                     alt="iamgurdeeposahan"> Gurdeep Osahan</div>
             <div class="popup-head-right pull-right">
-                <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="fa fa-times" aria-hidden="true"></i>
+                <button data-widget="remove" id="closeChat" class="chat-header-button pull-right" type="button"><i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
         </div>

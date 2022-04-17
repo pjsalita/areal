@@ -70,6 +70,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return "https://ui-avatars.com/api/?name={$initials}&color=fff&background={$background}";
     }
 
+    public function scopeArchitects($query)
+    {
+        return $query->where('account_type', 'architect');
+    }
+
+    public function scopeVerified($query)
+    {
+        return $query->whereNotNull('email_verified_at');
+    }
+
     public function likes()
     {
         return $this->hasMany(Like::class);

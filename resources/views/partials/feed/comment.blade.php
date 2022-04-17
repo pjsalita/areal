@@ -5,7 +5,7 @@
 
     <div class="media-body">
         <a href="{{ route('profile.show', $comment->user->id) }}" class="font-weight-bold mr-1 m-0">{{ $comment->user->name }}</a><span class="m-0">{{ $comment->body }}</span>
-        <div class="mb-2 text-muted h7">{{ $post->created_at->diffForHumans() }} ({{ $post->created_at->toDateTimeString() }})</div>
+        <div class="mb-2 text-muted h7">{{ $comment->created_at->diffForHumans() }} ({{ $comment->created_at->toDateTimeString() }})</div>
     </div>
 
     @self($comment->user->id)

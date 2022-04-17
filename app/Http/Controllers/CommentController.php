@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Notifications\CommentNotification;
+use App\Models\Notification;
 
 class CommentController extends Controller
 {
@@ -41,6 +43,19 @@ class CommentController extends Controller
         $comment->user()->associate($request->user());
         $post = Post::find($request->get('post_id'));
         $post->comments()->save($comment);
+
+        if ($post->user->id !== $request->user()->id) {
+            $post->user->notify(new CommentNotification($request->user(), $post, $comment));
+        } else {
+            // dd($post->comments()->get()->groupBy('user_id'), $post->comments()->groupBy('user_id')->get());
+            foreach ($post->comments()->get()->groupBy('user_id') as $userComment) {
+                // dd($userComment->first());
+                $firstUserComment = $userComment->first();
+                if ($firstUserComment->user->id !== $post->user->id) {
+                    $firstUserComment->user->notify(new CommentNotification($request->user(), $post, $comment, true));
+                }
+            }
+        }
 
         return redirect()->route("post.show", $post->id);
     }
@@ -88,6 +103,11 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
+
+        Notification::where([
+            ['type', 'App\Notifications\CommentNotification'],
+            ['data->reference_id', $comment->id]
+        ])->delete();
 
         return redirect()->back();
     }

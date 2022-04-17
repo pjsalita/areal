@@ -30,6 +30,13 @@
         <script src="{{ asset('assets/js/popup.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
 
+        <script>
+            Echo.private(`App.Models.User.{{ auth()->id() }}`)
+                .notification((notification) => {
+                    console.log(notification)
+                    // addNotifications([notification], '#notifications');
+                });
+        </script>
         @stack('scripts')
 
     </body>

@@ -72,7 +72,7 @@
                 @csrf
                 <img class="rounded-circle mr-2" width="45" src="{{  auth()->user()->profile_photo }}" alt="">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <textarea type="text" class="flex-grow-1 form-control mb-2 mb-md-0 mr-md-2" name="body" placeholder="Leave a comment..." rows="1"></textarea>
+                <textarea type="text" class="flex-grow-1 form-control mb-2 mb-md-0 mr-md-2" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
 
                 <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
             </form>
@@ -87,23 +87,23 @@
 @once
     @push('scripts')
         <script>
-            function like(el, id) {
-                el.classList.toggle("text-danger");
+            async function like(el, id) {
                 const badge = el.querySelector(".badge");
 
                 if (badge.classList.contains("badge-danger")) {
-                    badge.innerText = parseInt(badge?.innerText) - 1;
-                    axios.delete("/like", {
+                    const { data } = await axios.delete("/like", {
                         data: {
                             id,
                             likeable_type: "App\\Models\\Post"
                         }
                     });
+                    badge.innerText = data.likes;
                 } else {
-                    badge.innerText = parseInt(badge?.innerText) + 1;
-                    axios.post("/like", { id, likeable_type: "App\\Models\\Post" });
+                    const { data } = await axios.post("/like", { id, likeable_type: "App\\Models\\Post" });
+                    badge.innerText = data.likes;
                 }
 
+                el.classList.toggle("text-danger");
                 badge?.classList?.toggle("badge-secondary");
                 badge?.classList?.toggle("badge-danger");
             }

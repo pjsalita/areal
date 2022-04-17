@@ -14,19 +14,23 @@
             <a class="nav-item nav-link {{ request()->routeIs("feed") ? "active" : "" }}" href="{{ route("feed") }}">
                 <i class="fa fa-home"></i> <span class="d-inline d-lg-none"> Feed</span>
             </a>
-            <a class="nav-item nav-link {{ request()->routeIs("profile") ? "active" : "" }}" href="{{ route("profile") }}">
+
+            <a class="nav-item nav-link {{ request()->routeIs("messages") ? "active" : "" }}" href="{{ route("messages") }}">
                 <i class="fa fa-envelope"></i> <span class="d-inline d-lg-none"> Messages</span>
             </a>
-            <a class="nav-item nav-link position-relative {{ request()->routeIs("profile") ? "active" : "" }}" href="{{ route("profile") }}">
+
+            <a class="nav-item nav-link position-relative {{ request()->routeIs("notifications") ? "active" : "" }}" href="{{ route("notifications") }}">
                 <i class="fa fa-bell"></i>
                 @if(auth()->user()->unreadNotifications->count())
                     <span class="badge badge-pill badge-primary position-absolute" style="top: 5px; right: 0; font-size: 10px;">{{ auth()->user()->unreadNotifications->count() }}</span>
                 @endif
                 <span class="d-inline d-lg-none"> Notifications</span>
             </a>
+
             <a class="nav-item nav-link {{ request()->routeIs("profile") ? "active" : "" }}" href="{{ route("profile") }}">
                 <i class="fa fa-user"></i> <span class="d-inline d-lg-none"> Profile</span>
             </a>
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a href="{{ route('logout') }}" class="nav-item nav-link" onclick="event.preventDefault(); this.closest('form').submit();">

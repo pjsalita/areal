@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+
+    Route::get('/messages', [ProfileController::class, 'index'])->name('messages');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

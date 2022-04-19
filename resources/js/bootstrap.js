@@ -24,3 +24,9 @@ window.Echo = new Echo({
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true
 });
+
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+const tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl))
+
+const toastElList = [].slice.call(document.querySelectorAll('.toast'))
+const toastList = toastElList.map((toastEl) => new bootstrap.Toast(toastEl))

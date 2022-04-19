@@ -2,20 +2,22 @@
 @verified
 <div class="card gedf-card">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                    aria-controls="posts" aria-selected="true">Create post</a>
+                <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">
+                    Create post
+                </button>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                    aria-selected="false" href="#images">Images</a>
+                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="true">
+                    Images
+                </button>
             </li>
         </ul>
     </div>
     <form class="card-body" method="POST" action="{{ route('post.store') }}">
         @csrf
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content" id="myPostTabContent">
             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                 <div class="form-group">
                     <label class="sr-only" for="message">post</label>
@@ -25,19 +27,14 @@
 
             </div>
             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                <div class="form-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Upload image</label>
-                    </div>
-                </div>
-                <div class="py-4"></div>
+                <div class="input-group">
+                    <input type="file" class="form-control" id="customFile">
+                    <label class="input-group-text" for="customFile">Upload</label>
+                  </div>
             </div>
         </div>
-        <div class="btn-toolbar justify-content-between">
-            <div class="btn-group">
-                <button type="submit" class="btn btn-primary">Post</button>
-            </div>
+        <div class="mt-2">
+            <button type="submit" class="btn btn-primary">Post</button>
         </div>
     </form>
 </div>
@@ -46,19 +43,21 @@
 
 <div class="card gedf-card">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                    aria-controls="posts" aria-selected="true">Create post</a>
+                <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">
+                    Create post
+                </button>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                    aria-selected="false" href="#images">Images</a>
+                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="true">
+                    Images
+                </button>
             </li>
         </ul>
     </div>
     <div class="card-body">
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content" id="myPostTabContent">
             <div class="m-0 alert alert-warning" role="alert">
                 Verify your email address to post.
             </div>

@@ -2,12 +2,12 @@
     <div class="card-body">
         <div class="mb-2 d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
+                <div class="me-2">
                     <a href="{{ route('profile.show', $architect->id) }}">
                         <img class="rounded-circle" width="45" src="{{ $architect->profile_photo }}" alt="">
                     </a>
                 </div>
-                <div class="ml-2">
+                <div class="ms-2">
                     <div class="m-0 h5">
                         <a href="{{ route('profile.show', $architect->id) }}">{{ $architect->name }}</a>
                     </div>
@@ -25,7 +25,7 @@
         <a href="#" id="openChat" class="card-link">
             <i class="fa fa-comments"></i>
         </a>
-        <a href="#" class="card-link" data-toggle="modal" data-target="#bookAppointment">
+        <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#bookAppointment">
             <i class="fa fa-calendar"></i>
         </a>
     </div>

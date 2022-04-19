@@ -1,0 +1,29 @@
+<div class="bottom-0 p-3 toast-container position-fixed end-0" id="notificationToast" style="z-index: 11"></div>
+
+@once
+    @push('scripts')
+        <script>
+            const notificationTemplate = (notification) => `<div class="toast" id="${notification.id}" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header position-relative">
+                    <img src="${notification.user_photo}" width="45" class="rounded me-2" alt="">
+                    <span class="me-auto">${notification.message}</span>
+                    <a href="${notification.reference_link}?read=${notification.id}" class="stretched-link"></a>
+                    <button type="button" class="btn-close" style="z-index: 1" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>`
+
+            Echo.private(`App.Models.User.{{ auth()->id() }}`)
+                .notification((notification) => {
+                    const notificationCount = document.getElementById('notificationCount');
+                    const notificationContainer = document.getElementById('notificationToast');
+                    const template = notificationTemplate(notification);
+                    const element = document.createElement('div');
+                    element.innerHTML = template;
+                    notificationContainer.appendChild(element.firstChild);
+                    const toast = new bootstrap.Toast(notificationContainer.lastChild);
+                    notificationCount.innerText = parseInt(notificationCount.innerText || 0) + 1;
+                    toast.show();
+                });
+        </script>
+    @endpush
+@endonce

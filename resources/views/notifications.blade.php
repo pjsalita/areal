@@ -7,11 +7,11 @@
                 @include('partials.feed.profile', [ 'user' => $user ])
             </div>
             <div class="col-md-9">
-                <div class="card mb-3">
+                <div class="mb-3 card">
                     <div class="card-header border-bottom-0">
                         <span>Notifications</span>
-                        <span class="float-right">
-                            <a href="?read=all">
+                        <span class="float-end">
+                            <a href="?read=all" class="text-decoration-none">
                                 <i class="fa fa-paint-brush"></i> Mark All As Read</span>
                             </a>
                     </div>

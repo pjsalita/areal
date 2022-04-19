@@ -26,6 +26,10 @@
                                     <label for="login-password">PASSWORD</label>
                                     <input id="login-password" name="password" type="password" required>
                                 </div>
+                                <label for="remember_me" class="d-inline-flex align-items-center">
+                                    <input id="remember_me" type="checkbox" class="" name="remember">
+                                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                                </label>
                                 <div class="text-center input-block">
                                     <label id="login-error" class="!text-red-400"></label>
                                 </div>

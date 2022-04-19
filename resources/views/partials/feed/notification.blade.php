@@ -1,6 +1,6 @@
 <div class="p-3 mb-2 d-flex rounded-3 notification position-relative">
     <div>
-        <img class="me-3 rounded-circle" width="45" src="{{ $notification->data["user_photo"] }}" alt="">
+        <img class="me-3 rounded-circle" width="45" height="45" src="{{ $notification->data["user_photo"] }}" alt="">
     </div>
     <div class="media-body">
         <a href="{{ $notification->data["reference_link"] }}?read={{ $notification->id }}" class="stretched-link">

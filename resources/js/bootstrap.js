@@ -5,7 +5,6 @@
  */
 
 window.axios = require('axios');
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
@@ -17,7 +16,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
-
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
@@ -25,8 +23,16 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
-const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-const tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl))
+window.pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
+    encrypted: true,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    authEndpoint: '/chat/chat/auth',
+    auth: {
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }
+});
 
-const toastElList = [].slice.call(document.querySelectorAll('.toast'))
-const toastList = toastElList.map((toastEl) => new bootstrap.Toast(toastEl))
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+tooltipTriggerList.map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl))

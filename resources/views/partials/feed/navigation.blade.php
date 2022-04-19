@@ -15,8 +15,10 @@
                 <i class="fa fa-home"></i> <span class="d-inline d-lg-none"> Feed</span>
             </a>
 
-            <a class="nav-item nav-link text-decoration-none {{ request()->routeIs("messages") ? "active" : "" }}" href="{{ route("messages") }}">
-                <i class="fa fa-envelope"></i> <span class="d-inline d-lg-none"> Messages</span>
+            <a class="nav-item nav-link text-decoration-none position-relative {{ request()->routeIs("messages") ? "active" : "" }}" href="{{ route("messages") }}">
+                <i class="fa fa-envelope"></i>
+                <span class="badge rounded-pill bg-primary position-absolute" id="messagesCount" style="top: 5px; right: 0; font-size: 10px;">{{ auth()->user()->messages()->where('seen', 0)->count() > 0 ? auth()->user()->messages()->where('seen', 0)->count() : "" }}</span>
+                <span class="d-inline d-lg-none"> Messages</span>
             </a>
 
             <a class="nav-item nav-link text-decoration-none position-relative {{ request()->routeIs("notifications") ? "active" : "" }}" href="{{ route("notifications") }}">

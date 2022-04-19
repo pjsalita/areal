@@ -1,6 +1,6 @@
 <div class="p-2 my-2 d-flex">
     <a href="{{ route('profile.show', $comment->user->id) }}" class="me-2">
-        <img class="rounded-circle" width="45"  src="{{ $comment->user->profile_photo }}" alt="">
+        <img class="rounded-circle" width="45" height="45" src="{{ $comment->user->profile_photo }}" alt="">
     </a>
 
     <div>

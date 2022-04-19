@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 
-    Route::get('/messages', [ProfileController::class, 'index'])->name('messages');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

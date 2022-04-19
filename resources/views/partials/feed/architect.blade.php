@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="me-2">
                     <a href="{{ route('profile.show', $architect->id) }}">
-                        <img class="rounded-circle" width="45" src="{{ $architect->profile_photo }}" alt="">
+                        <img class="rounded-circle" width="45" height="45" src="{{ $architect->profile_photo }}" alt="">
                     </a>
                 </div>
                 <div class="ms-2">
@@ -22,10 +22,10 @@
                 <div class="h7 text-muted">Office Address : Blk 10 Lot 8 Sapang matakla, Planet Namec</div>
             @endif
         </p>
-        <a href="#" id="openChat" class="card-link">
+        <a href="{{ route("chat") }}/{{ $architect->id }}" id="openChat" class="card-link text-decoration-none">
             <i class="fa fa-comments"></i>
         </a>
-        <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#bookAppointment">
+        <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment">
             <i class="fa fa-calendar"></i>
         </a>
     </div>

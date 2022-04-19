@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLikesTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->morphs('likeable');
+        Schema::create('ch_favorites', function (Blueprint $table) {
+            $table->bigInteger('id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('favorite_id');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateLikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('ch_favorites');
     }
 }

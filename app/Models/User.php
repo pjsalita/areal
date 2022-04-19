@@ -32,7 +32,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'account_type',
         'gender',
         'address',
-        'profile_picture',
     ];
 
     /**
@@ -54,6 +53,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['name', 'profile_photo'];
+
     public function getNameAttribute() {
         return "{$this->first_name} {$this->last_name}";
     }
@@ -63,8 +64,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(ChMessage::class, 'to_id')->orderBy('created_at', 'desc');
+    }
+
+    public static function getFullName($user) {
+        return "{$user->first_name} {$user->last_name}";
+    }
+
+    public static function getAvatar($user) {
+        // return asset('/storage/'.config('chatify.user_avatar.folder').'/'.$user->avatar);
+        $initials = "{$user->first_name[0]}+{$user->last_name[0]}";
+        $background = $user->gender === "male" ? "4AD2F2" : "FD8DAD";
+        return "https://ui-avatars.com/api/?name={$initials}&color=fff&background={$background}";
+    }
+
     public function getProfilePhotoAttribute()
     {
+        // return asset('/storage/'.config('chatify.user_avatar.folder').'/'.$this->avatar);
         $initials = "{$this->first_name[0]}+{$this->last_name[0]}";
         $background = $this->gender === "male" ? "4AD2F2" : "FD8DAD";
         return "https://ui-avatars.com/api/?name={$initials}&color=fff&background={$background}";

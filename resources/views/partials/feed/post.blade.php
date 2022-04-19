@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="me-2">
                     <a href="{{ route('profile.show', $post->user->id) }}">
-                        <img class="rounded-circle" width="45" src="{{  $post->user->profile_photo }}" alt="">
+                        <img class="rounded-circle" width="45" height="45" src="{{  $post->user->profile_photo }}" alt="">
                     </a>
                 </div>
                 <div class="ms-2">
@@ -70,7 +70,7 @@
         @verified
             <form class="p-2 d-inline-flex w-100 bg-gray" method="POST" action="{{ route("comment.store") }}" autocomplete="off">
                 @csrf
-                <img class="rounded-circle me-2" width="45" src="{{  auth()->user()->profile_photo }}" alt="">
+                <img class="rounded-circle me-2" width="45" height="45" src="{{  auth()->user()->profile_photo }}" alt="">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                 <textarea type="text" class="mb-2 flex-grow-1 form-control mb-md-0 me-md-2" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
 

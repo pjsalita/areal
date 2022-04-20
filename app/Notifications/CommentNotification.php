@@ -60,6 +60,7 @@ class CommentNotification extends Notification
         return [
             'user_id' => $this->user->id,
             'user_photo' => $this->user->profile_photo,
+            'parent_id' => $this->post->id,
             'reference_id' => $this->comment->id,
             'reference_link' => route("post.show", $this->post->id),
             'message' => $message,

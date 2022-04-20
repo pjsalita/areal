@@ -7,7 +7,7 @@ return [
     | Messenger display name
     |-------------------------------------
     */
-    'name' => env('CHATIFY_NAME', 'AReal Chat'),
+    'name' => env('CHATIFY_NAME', 'Chat || AReal : Augmented Reality 2D Floor Plan Scanner'),
 
     /*
     |-------------------------------------

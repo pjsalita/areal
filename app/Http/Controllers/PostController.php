@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Notification;
 
 class PostController extends Controller
 {
@@ -86,6 +87,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        Notification::whereIn('type', [
+            'App\Notifications\LikeNotification',
+            'App\Notifications\CommentNotification'
+        ])->where('data->parent_id', $post->id)->delete();
+
         $post->delete();
 
         return redirect()->back();

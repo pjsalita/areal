@@ -6,13 +6,13 @@
             const notificationTemplate = (notification) => `<div class="toast" id="${notification.id}" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header position-relative">
                     <img src="${notification.user_photo}" width="45" height="45" class="rounded me-2" alt="">
-                    <span class="me-auto">${notification.message}</span>
-                    <a href="${notification.reference_link}?read=${notification.id}" class="stretched-link"></a>
+                    <span class="me-auto">${notification.toast_message || notification.message}</span>
+                    <a href="${notification.reference_link}" class="stretched-link"></a>
                     <button type="button" class="btn-close" style="z-index: 1" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             </div>`
 
-            @if(!request()->routeIs("user") || !request()->routeIs("chat"))
+            @if(!request()->routeIs("user") && !request()->routeIs("chat"))
                 const msgChannel = pusher.subscribe("private-chatify");
 
                 msgChannel.bind("messaging", (notification) => {

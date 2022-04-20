@@ -29,9 +29,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 
-    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
-
-
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 

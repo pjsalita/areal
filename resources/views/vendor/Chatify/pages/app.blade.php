@@ -8,9 +8,10 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
+                <a href="javascript:void(0)"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
+                    <a href="{{ route('feed') }}"><i class="fas fa-home"></i></a>
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>
                     <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
                 </nav>
@@ -79,7 +80,10 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="{{ route('feed') }}"><i class="fas fa-home"></i></a>
+                    <a href="#" class="book-appointment" data-bs-toggle="modal" data-bs-target="#bookAppointment">
+                        <i class="fa fa-calendar"></i>
+                    </a>
+                    {{-- <a href="{{ route('feed') }}"><i class="fas fa-home"></i></a> --}}
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
@@ -121,5 +125,6 @@
     </div>
 </div>
 
+@include('partials.feed.booking')
 @include('Chatify::layouts.modals')
 @include('Chatify::layouts.footerLinks')

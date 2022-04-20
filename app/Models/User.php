@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Contracts\Likeable;
 use App\Models\Like;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -75,6 +76,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function getAvatar($user) {
         // return asset('/storage/'.config('chatify.user_avatar.folder').'/'.$user->avatar);
+        if ($user->avatar) {
+            return Storage::url($user->avatar);
+        }
+
         $initials = "{$user->first_name[0]}+{$user->last_name[0]}";
         $background = $user->gender === "male" ? "4AD2F2" : "FD8DAD";
         return "https://ui-avatars.com/api/?name={$initials}&color=fff&background={$background}";
@@ -82,6 +87,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getProfilePhotoAttribute()
     {
+        return self::getAvatar($this);
         // return asset('/storage/'.config('chatify.user_avatar.folder').'/'.$this->avatar);
         $initials = "{$this->first_name[0]}+{$this->last_name[0]}";
         $background = $this->gender === "male" ? "4AD2F2" : "FD8DAD";

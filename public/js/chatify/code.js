@@ -392,6 +392,7 @@ function IDinfo(id, type) {
         messageInput.focus();
         // update info in view
         $(".messenger-infoView .info-name").html(data.fetch.name);
+        $(".messenger-infoView .info-position").html(data.fetch.position);
         $(".m-header-messaging .user-name").html(data.fetch.name);
         // Star status
         data.favorite > 0

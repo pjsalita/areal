@@ -15,7 +15,7 @@
             </li>
         </ul>
     </div>
-    <form class="card-body" method="POST" action="{{ route('post.store') }}">
+    <form class="card-body" method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="tab-content" id="myPostTabContent">
             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
@@ -28,10 +28,11 @@
             </div>
             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="customFile">
+                    <input type="file" name="images[]" class="form-control" id="customFile" onchange="previewImage(event)" accept=".png,.jpg,.jpeg,.svg,.gif,.bmp" multiple>
                     <label class="input-group-text" for="customFile">Upload</label>
                   </div>
             </div>
+            <div id="previewImages" class="row my-3"></div>
         </div>
         <div class="mt-2">
             <button type="submit" class="btn btn-primary">Post</button>
@@ -65,3 +66,26 @@
     </div>
 </div>
 @endverified
+
+@push("scripts")
+    <script>
+        const previewImage = (event) => {
+            const imageTemplate = (file) => `<div class="col-3 mb-4 position-relative">
+                <img src="${URL.createObjectURL(file)}" alt="" class="img-thumbnail w-100 h-100" />
+                <!--<button type="button" class="btn-close position-absolute" aria-label="Close" style="top: 10px; right: 20px;"></button>!-->
+            </div>`;
+            const previewContainer = document.getElementById("previewImages");
+            previewContainer.innerHTML = "";
+
+            if (event.target.files.length > 0) {
+                const files = event.target.files;
+                Array.from(files).forEach(file => {
+                    const template = imageTemplate(file);
+                    const element = document.createElement('div');
+                    element.innerHTML = template;
+                    previewContainer.appendChild(element.firstChild);
+                });
+            }
+        }
+    </script>
+@endpush

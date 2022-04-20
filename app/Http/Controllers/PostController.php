@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Notification;
+use App\Models\PostAttachment;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -36,11 +38,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        Post::create([
+        $post = Post::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'body' => $request->body,
         ]);
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                // $image_title = $image->getClientOriginalName();
+                $image_name = Str::uuid() . "." . $image->getClientOriginalExtension();
+                $image->storeAs(config('chatify.attachments.folder'), $image_name);
+                PostAttachment::create([
+                    'post_id' => $post->id,
+                    'filename' => $image_name,
+                ]);
+            }
+        }
 
         return redirect()->back();
     }

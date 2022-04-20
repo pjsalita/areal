@@ -27,4 +27,9 @@ class Post extends Model implements Likeable
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(PostAttachment::class)->orderBy('created_at', 'desc');
+    }
 }

@@ -1,7 +1,7 @@
 @section('title', Str::ucfirst((auth()->user()->account_type)) . " Feed")
 
 <x-app-layout>
-    <div class="my-3 container-fluid gedf-wrapper">
+    <div class="my-3 container-fluid">
         <div class="row">
             <div class="col-md-3">
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])

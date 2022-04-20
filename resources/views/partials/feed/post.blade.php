@@ -36,6 +36,19 @@
         </a>
 
         <p class="card-text">{{ $post->body }}</p>
+
+        @if ($post->attachments->count())
+            <div class="row">
+                @foreach ($post->attachments as $attachment)
+                    <div class="col-3 mb-4 position-relative">
+                        @if ($attachment->type === "image")
+                            <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" />
+                            <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
 
     <div class="card-footer d-flex">

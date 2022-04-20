@@ -1,6 +1,6 @@
 <!--- Markup for Create Post-->
 @verified
-<div class="card gedf-card">
+<div class="card mb-5">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">
@@ -41,7 +41,7 @@
 
 @else
 
-<div class="card gedf-card">
+<div class="card mb-5">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">

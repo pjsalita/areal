@@ -8,7 +8,7 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="javascript:void(0)"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
+                <a href="/chat"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="{{ route('feed') }}"><i class="fas fa-home"></i></a>
@@ -17,7 +17,7 @@
                 </nav>
             </nav>
             {{-- Search input --}}
-            <input type="text" class="messenger-search" placeholder="Search" />
+            {{-- <input type="text" class="messenger-search" placeholder="Search" /> --}}
             {{-- Tabs --}}
             {{-- <div class="messenger-listView-tabs">
                 <a href="#" @if($type == 'user') class="active-tab" @endif data-view="users">

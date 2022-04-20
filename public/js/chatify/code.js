@@ -303,6 +303,7 @@ function disableOnLoad(action = true) {
   if (action == true) {
     // hide star button
     $(".add-to-favorite").hide();
+    $(".book-appointment").hide();
     // hide send card
     $(".messenger-sendCard").hide();
     // add loading opacity to messages container
@@ -393,7 +394,13 @@ function IDinfo(id, type) {
         // update info in view
         $(".messenger-infoView .info-name").html(data.fetch.name);
         $(".messenger-infoView .info-position").html(data.fetch.position);
-        $(".m-header-messaging .user-name").html(data.fetch.name);
+        $(".m-header-messaging .user-name").html(getMessengerId() != auth_id ? data.fetch.name : "Saved Messages");
+        $(".m-header-messaging .user-name").attr("href", `/profile/${data.fetch.id}`);
+
+        if (data.fetch.account_type !== 'client' && getMessengerId() != auth_id) {
+            $(".book-appointment").show();
+        }
+
         // Star status
         data.favorite > 0
           ? $(".add-to-favorite").addClass("favorite")

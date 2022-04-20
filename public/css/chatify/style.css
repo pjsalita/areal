@@ -68,7 +68,7 @@ body {
   margin: 10px;
 }
 .messenger-listView .m-body {
-  margin-top: 90px;
+  margin-top: 45px;
 }
 .messenger-messagingView {
   position: relative;
@@ -132,11 +132,11 @@ body {
 }
 .messenger-tab {
   overflow: auto;
-  height: calc(100vh - 95px);
+  height: calc(100vh - 50px);
   display: none;
   position: relative;
 }
-.add-to-favorite {
+.add-to-favorite, .book-appointment {
   display: none;
 }
 .add-to-favorite svg {

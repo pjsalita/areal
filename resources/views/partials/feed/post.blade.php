@@ -1,4 +1,4 @@
-<div class="mb-5 card">
+<div class="mb-3 card">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
@@ -68,11 +68,11 @@
         @endforeach
 
         @verified
-            <form class="p-2 d-inline-flex w-100 bg-gray" method="POST" action="{{ route("comment.store") }}" autocomplete="off">
+            <form class="p-2 d-inline-flex align-items-center w-100 bg-gray" method="POST" action="{{ route("comment.store") }}" autocomplete="off">
                 @csrf
-                <img class="rounded-circle me-2" width="45" height="45" src="{{  auth()->user()->profile_photo }}" alt="">
+                <img class="rounded-circle" width="45" height="45" src="{{  auth()->user()->profile_photo }}" alt="">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <textarea type="text" class="mb-2 flex-grow-1 form-control mb-md-0 me-md-2" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
+                <textarea type="text" class="mx-2 flex-grow-1 form-control" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
 
                 <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
             </form>

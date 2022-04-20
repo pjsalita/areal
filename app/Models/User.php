@@ -65,6 +65,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
     }
 
+    public function clientAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'user_id')->orderBy('created_at', 'asc');
+    }
+
+    public function architectAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'architect_id')->orderBy('created_at', 'asc');
+    }
+
     public function messages()
     {
         return $this->hasMany(ChMessage::class, 'to_id')->orderBy('created_at', 'desc');

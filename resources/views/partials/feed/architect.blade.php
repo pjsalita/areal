@@ -25,7 +25,7 @@
         <a href="{{ route("chat") }}/{{ $architect->id }}" id="openChat" class="card-link text-decoration-none">
             <i class="fa fa-comments"></i>
         </a>
-        <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment">
+        <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $architect->id }}">
             <i class="fa fa-calendar"></i>
         </a>
     </div>

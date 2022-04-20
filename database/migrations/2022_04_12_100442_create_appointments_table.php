@@ -15,6 +15,18 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreignId('architect_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->text('message')->nullable();
+            $table->enum('status', ['pending', 'declined', 'approved'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

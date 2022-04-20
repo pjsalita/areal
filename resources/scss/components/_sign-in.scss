@@ -170,6 +170,7 @@
 
 			.column {
 				margin: 0 2px;
+                flex: 1 0 0%;
 			}
 		}
 	}
@@ -263,6 +264,7 @@
 			color: $dark;
 			background: #fff;
 			border: 1px solid $dark;
+            height: 32px;
 		}
 
 		select {

@@ -21,11 +21,33 @@
         @endif
     </div>
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="h6 text-muted">Meeting Schedule</div>
-            <div class="h5">March 10, 2022</div>
-            <div class="h7">9:00am - 10:00am with Aeron DickDikan</div>
-        </li>
-    </ul>
+    @self($user->id)
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="h6 text-muted">Meeting Schedule</div>
+                @client
+                    @forelse ($user->clientAppointments()->approvedAppointments()->get() as $appointment)
+                        <div class="mb-3">
+                            <div class="h5"><a href="{{ route("appointment.show", $appointment->id) }}">{{ Carbon\Carbon::parse($appointment->end_date)->format('F d, Y') }}</a></div>
+                            <div class="h7">{{ Carbon\Carbon::parse($appointment->start_date)->format('h:iA') }} - {{ Carbon\Carbon::parse($appointment->end_date)->format('h:iA') }} with <a href="{{ route("profile.show", $appointment->architect->id) }}">{{ $appointment->architect->name }}</a></div>
+                        </div>
+                    @empty
+                        <div class="h7">No upcoming appointments</div>
+                    @endforelse
+                @endclient
+
+                @architect
+                    @forelse ($user->architectAppointments()->approvedAppointments()->get() as $appointment)
+                        <div class="mb-3">
+                            <div class="h5"><a href="{{ route("appointment.show", $appointment->id) }}">{{ Carbon\Carbon::parse($appointment->end_date)->format('F d, Y') }}</a></div>
+                            <div class="h7">{{ Carbon\Carbon::parse($appointment->start_date)->format('h:iA') }} - {{ Carbon\Carbon::parse($appointment->end_date)->format('h:iA') }} with <a href="{{ route("profile.show", $appointment->client->id) }}">{{ $appointment->client->name }}</a></div>
+                        </div>
+                    @empty
+                        <div class="h7">No upcoming appointments</div>
+                    @endforelse
+                @endarchitect
+            </li>
+        </ul>
+    @endself
+
 </div>

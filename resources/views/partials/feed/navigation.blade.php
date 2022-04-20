@@ -15,6 +15,10 @@
                 <i class="fa fa-home"></i> <span class="d-inline d-lg-none"> Feed</span>
             </a>
 
+            <a class="nav-item nav-link text-decoration-none {{ request()->routeIs("appointment.index") ? "active" : "" }}" href="{{ route("appointment.index") }}">
+                <i class="fa fa-calendar"></i> <span class="d-inline d-lg-none"> Appointments</span>
+            </a>
+
             <a class="nav-item nav-link text-decoration-none position-relative {{ request()->routeIs("chat") ? "active" : "" }}" href="{{ route("chat") }}"
                 @unverified data-bs-toggle="tooltip" data-bs-placement="bottom" title="Verify your email address to access messages" @endunverified>
                 <i class="fa fa-envelope"></i>

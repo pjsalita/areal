@@ -47,9 +47,7 @@ class CommentController extends Controller
         if ($post->user->id !== $request->user()->id) {
             $post->user->notify(new CommentNotification($request->user(), $post, $comment));
         } else {
-            // dd($post->comments()->get()->groupBy('user_id'), $post->comments()->groupBy('user_id')->get());
             foreach ($post->comments()->get()->groupBy('user_id') as $userComment) {
-                // dd($userComment->first());
                 $firstUserComment = $userComment->first();
                 if ($firstUserComment->user->id !== $post->user->id) {
                     $firstUserComment->user->notify(new CommentNotification($request->user(), $post, $comment, true));

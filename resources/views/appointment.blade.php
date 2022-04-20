@@ -1,4 +1,4 @@
-@section('title', Str::ucfirst($post->title))
+@section('title', "Appointment #" . Str::ucfirst($appointment->id))
 
 <x-app-layout>
     <div class="my-3 container-fluid">
@@ -7,7 +7,7 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
             <div class="col-md-9">
-                @include('partials.feed.post', [ 'post' => $post ])
+                @include('partials.feed.appointment', [ 'appointment' => $appointment ])
             </div>
         </div>
     </div>

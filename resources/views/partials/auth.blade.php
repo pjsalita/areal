@@ -17,7 +17,6 @@
                     <form class="form form-login" onsubmit="return login(event)">
                         <div>
                             <fieldset>
-                                <legend>Please, enter your email and password for login.</legend>
                                 <div class="input-block">
                                     <label for="login-email">EMAIL</label>
                                     <input id="login-email" name="email" type="email" required>
@@ -46,27 +45,72 @@
                     </button>
                     <form class="form form-signup" onsubmit="return register(event)">
                         <fieldset>
-                            <legend>Please, enter your first name, last name, mobile, birthday, gender, account
-                                type, email, password and password confirmation for sign up.
-                            </legend>
                             <div class="row">
-                                <div class="column -first">
+                                <div class="column">
                                     <div class="input-block">
                                         <label for="signup-first-name">FIRST NAME</label>
                                         <input id="signup-first-name" name="first_name" type="text" tabindex="1" required>
                                     </div>
+                                </div>
+                                <div class="column">
+                                    <div class="input-block">
+                                        <label for="signup-last-name">LAST NAME</label>
+                                        <input id="signup-last-name" name="last_name" type="text" tabindex="2" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
                                     <div class="input-block">
                                         <label for="signup-birthday">BIRTHDAY</label>
                                         <input id="signup-birthday" name="birthdate" type="date" tabindex="3" required>
                                     </div>
+                                </div>
+                                <div class="column">
+                                    <div class="input-block">
+                                        <label for="signup-gender">GENDER</label>
+                                        <select id="signup-gender" name="gender" placeholder="SELECT GENDER" tabindex="4">
+                                            <option value="" disabled selected>SELECT GENDER</option>
+                                            <option value="male">MALE</option>
+                                            <option value="female">FEMALE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
                                     <div class="input-block">
                                         <label for="signup-email">EMAIL</label>
                                         <input id="signup-email" name="email" type="email" tabindex="5" required>
                                     </div>
+                                </div>
+                                <div class="column">
+                                    <div class="input-block">
+                                        <label for="signup-number">PHONE NUMBER</label>
+                                        <input id="signup-number" name="phone_number" type="text" tabindex="6" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
                                     <div class="input-block">
                                         <label for="signup-password">PASSWORD</label>
                                         <input id="signup-password" name="password" type="password" tabindex="7" required>
                                     </div>
+                                </div>
+                                <div class="column">
+                                    <div class="input-block">
+                                        <label for="signup-password-confirm">CONFIRM PASSWORD</label>
+                                        <input id="signup-password-confirm" name="password_confirmation" type="password" tabindex="8" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
                                     <div class="input-block">
                                         <label for="signup-type">ACCOUNT TYPE</label>
                                         <select id="signup-type" name="account_type" tabindex="9">
@@ -76,27 +120,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="column -second">
-                                    <div class="input-block">
-                                        <label for="signup-last-name">LAST NAME</label>
-                                        <input id="signup-last-name" name="last_name" type="text" tabindex="2" required>
-                                    </div>
-                                    <div class="input-block">
-                                        <label for="signup-gender">GENDER</label>
-                                        <select id="signup-gender" name="gender" placeholder="SELECT GENDER" tabindex="4">
-                                            <option value="" disabled selected>SELECT GENDER</option>
-                                            <option value="male">MALE</option>
-                                            <option value="female">FEMALE</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-block">
-                                        <label for="signup-number">PHONE NUMBER</label>
-                                        <input id="signup-number" name="phone_number" type="text" tabindex="6" required>
-                                    </div>
-                                    <div class="input-block">
-                                        <label for="signup-password-confirm">CONFIRM PASSWORD</label>
-                                        <input id="signup-password-confirm" name="password_confirmation" type="password" tabindex="8" required>
-                                    </div>
+                                <div class="column">
                                     <div id="signup-position-block" class="input-block" style="display: none">
                                         <label for="signup-position">POSITION</label>
                                         <input id="signup-position" name="position" type="text" tabindex="10">

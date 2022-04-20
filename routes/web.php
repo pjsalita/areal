@@ -7,7 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointment.index');
+    Route::get('/appointment/{appointment}', [AppointmentController::class, 'show'])->name('appointment.show');
+    Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+    Route::put('/appointment/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

@@ -29,7 +29,7 @@ window.pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
     authEndpoint: '/chat/chat/auth',
     auth: {
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     }
 });

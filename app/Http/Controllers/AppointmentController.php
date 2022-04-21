@@ -22,20 +22,33 @@ class AppointmentController extends Controller
         $isClient = auth()->user()->account_type === "client";
         $pendingAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
             ->where('status', 'pending')
+            ->where('start_date', '>=', Carbon::now())
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $approvedAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
+        $upcomingAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
             ->where('status', 'approved')
+            ->where('start_date', '>=', Carbon::now())
             ->orderBy('start_date', 'asc')
             ->get();
 
-        $declinedAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
-            ->where('status', 'declined')
-            ->orderBy('created_at', 'desc')
+        $ongoingAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
+            ->where('status', 'approved')
+            ->where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->orderBy('start_date', 'asc')
             ->get();
 
-        return view("appointments", compact('pendingAppointments', 'approvedAppointments', 'declinedAppointments'));
+        $historyAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
+            ->where(function ($q) {
+                $q->where('start_date', '<=', Carbon::now())
+                    ->where('end_date', '<=', Carbon::now());
+            })
+            ->orWhere('status', 'declined')
+            ->orderBy('end_date', 'desc')
+            ->get();
+
+        return view("appointments", compact('ongoingAppointments', 'historyAppointments', 'pendingAppointments', 'upcomingAppointments'));
     }
 
     /**
@@ -80,7 +93,11 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        return view("appointment", compact('appointment'));
+        if (in_array(auth()->id(), [$appointment->architect_id, $appointment->user_id])) {
+            return view("appointment", compact('appointment'));
+        }
+
+        return abort(404);
     }
 
     /**

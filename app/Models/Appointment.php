@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Appointment extends Model
 {
@@ -31,5 +32,10 @@ class Appointment extends Model
     public function scopeApprovedAppointments($query)
     {
         return $query->where('status', 'approved');
+    }
+
+    public function scopeFutureAppointments($query)
+    {
+        return $query->where('end_date', '>=', Carbon::now());
     }
 }

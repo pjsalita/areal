@@ -26,10 +26,16 @@
             <li class="list-group-item">
                 <div class="h6 text-muted">Meeting Schedule</div>
                 @client
-                    @forelse ($user->clientAppointments()->approvedAppointments()->get() as $appointment)
+                    @forelse ($user->clientAppointments()->approvedAppointments()->futureAppointments()->selectRaw('*, Date(start_date) as date')->get()->groupBy('date') as $date => $appointments)
                         <div class="mb-3">
-                            <div class="h5"><a href="{{ route("appointment.show", $appointment->id) }}">{{ Carbon\Carbon::parse($appointment->end_date)->format('F d, Y') }}</a></div>
-                            <div class="h7">{{ Carbon\Carbon::parse($appointment->start_date)->format('h:iA') }} - {{ Carbon\Carbon::parse($appointment->end_date)->format('h:iA') }} with <a href="{{ route("profile.show", $appointment->architect->id) }}">{{ $appointment->architect->name }}</a></div>
+                            <div class="h5">{{ Carbon\Carbon::parse($date)->format('F d, Y') }}</div>
+                            @foreach ($appointments as $appointment)
+                                <div class="h7">
+                                    <a href="{{ route("appointment.show", $appointment->id) }}">{{ Carbon\Carbon::parse($appointment->start_date)->format('h:iA') }} - {{ Carbon\Carbon::parse($appointment->end_date)->format('h:iA') }}</a>
+                                    with
+                                    <a href="{{ route("profile.show", $appointment->architect->id) }}">{{ $appointment->architect->name }}</a>
+                                </div>
+                            @endforeach
                         </div>
                     @empty
                         <div class="h7">No upcoming appointments</div>
@@ -37,10 +43,16 @@
                 @endclient
 
                 @architect
-                    @forelse ($user->architectAppointments()->approvedAppointments()->get() as $appointment)
+                    @forelse ($user->architectAppointments()->approvedAppointments()->futureAppointments()->selectRaw('*, Date(start_date) as date')->get()->groupBy('date') as $date => $appointments)
                         <div class="mb-3">
-                            <div class="h5"><a href="{{ route("appointment.show", $appointment->id) }}">{{ Carbon\Carbon::parse($appointment->end_date)->format('F d, Y') }}</a></div>
-                            <div class="h7">{{ Carbon\Carbon::parse($appointment->start_date)->format('h:iA') }} - {{ Carbon\Carbon::parse($appointment->end_date)->format('h:iA') }} with <a href="{{ route("profile.show", $appointment->client->id) }}">{{ $appointment->client->name }}</a></div>
+                            <div class="h5">{{ Carbon\Carbon::parse($date)->format('F d, Y') }}</div>
+                            @foreach ($appointments as $appointment)
+                                <div class="h7">
+                                    <a href="{{ route("appointment.show", $appointment->id) }}">{{ Carbon\Carbon::parse($appointment->start_date)->format('h:iA') }} - {{ Carbon\Carbon::parse($appointment->end_date)->format('h:iA') }}</a>
+                                    with
+                                    <a href="{{ route("profile.show", $appointment->client->id) }}">{{ $appointment->client->name }}</a>
+                                </div>
+                            @endforeach
                         </div>
                     @empty
                         <div class="h7">No upcoming appointments</div>

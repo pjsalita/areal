@@ -1224,6 +1224,10 @@ $(document).ready(function () {
     star(getMessengerId());
   });
 
+  $(".book-appointment").on("click", function () {
+    $('#book-architect-id')[0].value = getMessengerId();
+  });
+
   // calling Css Media Queries
   cssMediaQueries();
 

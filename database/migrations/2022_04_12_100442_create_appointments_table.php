@@ -26,6 +26,7 @@ class CreateAppointmentsTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->text('message')->nullable();
+            $table->string('link')->nullable();
             $table->enum('status', ['pending', 'declined', 'approved'])->default('pending');
             $table->timestamps();
             $table->softDeletes();

@@ -37,6 +37,4 @@
             @endclient
         </div>
     </div>
-
-    @include('partials.feed.booking')
 </x-app-layout>

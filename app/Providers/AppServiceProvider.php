@@ -45,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             return $id && auth()->id() === $id;
         });
 
+        Blade::if('notself', function ($id) {
+            return $id && auth()->id() !== $id;
+        });
+
         Blade::if('verified', function () {
             return optional(auth()->user())->hasVerifiedEmail();
         });

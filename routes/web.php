@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\GoogleAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/appointment/{appointment}', [AppointmentController::class, 'show'])->name('appointment.show');
     Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
     Route::put('/appointment/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
+
+    Route::get('/google/auth', [GoogleAccountController::class, 'store'])->name('google.store');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

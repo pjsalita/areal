@@ -8,7 +8,7 @@ use App\Notifications\RequestAppointment;
 use App\Notifications\RespondAppointment;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Spatie\GoogleCalendar\Event;
+use App\Services\Google;
 
 class AppointmentController extends Controller
 {
@@ -118,25 +118,39 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(Request $request, Appointment $appointment, Google $google)
     {
-        // $event = new Event;
-        // $event->name = 'AReal Appointment';
-        // $event->description = "An appointment between {$appointment->architect->name} & {$appointment->client->name}";
-        // $event->startDateTime = Carbon::parse($appointment->start_date);
-        // $event->endDateTime = Carbon::parse($appointment->end_date);
-        // $event->addAttendee([
-        //     'email' => $appointment->architect->email,
-        //     'name' => $appointment->architect->name,
-        //     'comment' => 'Architect',
-        // ]);
-        // $event->addAttendee([
-        //     'email' => $appointment->client->email,
-        //     'name' => $appointment->client->name,
-        //     'comment' => 'Client',
-        // ]);
+        if ($request->status === 'approved') {
+            $service = $google->connectUsing($request->user()->google_token)->service('Calendar');
+            $event = $google->connectUsing($request->user()->google_token)->service('Calendar_Event');
 
-        // $event->save();
+            $event->summary = 'AReal Appointment';
+            $event->description = "An appointment between {$appointment->architect->name} & {$appointment->client->name}";
+            $event->start = [ 'dateTime' => Carbon::parse($appointment->start_date) ];
+            $event->end = [ 'dateTime' => Carbon::parse($appointment->end_date) ];
+            $event->attendees = [
+                [
+                    'email' => $appointment->architect->email,
+                    'name' => $appointment->architect->name,
+                    'comment' => 'Architect',
+                ],
+                [
+                    'email' => $appointment->client->email,
+                    'name' => $appointment->client->name,
+                    'comment' => 'Client',
+                ]
+            ];
+
+            $event->conferenceData = [
+                'createRequest' => [
+                    'requestId' => time()
+                ]
+            ];
+
+            $calendarEvent = $service->events->insert(collect($service->calendarList->listCalendarList())->first()->id, $event, ['conferenceDataVersion' => 1]);
+
+            $appointment->link = $calendarEvent->hangoutLink;
+        }
 
         $appointment->status = $request->status;
         $appointment->save();

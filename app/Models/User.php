@@ -33,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'account_type',
         'gender',
         'address',
+        'google_token'
     ];
 
     /**
@@ -52,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'google_token' => 'array',
     ];
 
     protected $appends = ['name', 'profile_photo'];

@@ -19,6 +19,19 @@
         @if($user->address)
             <div class="h7 text-muted">Address : Blk 10 Lot 8 Sapang matakla, Planet Namec</div>
         @endif
+
+        @client
+        @notself($user->id)
+            <div class="mt-2">
+                <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
+                    <i class="fa fa-comments"></i>
+                </a>
+                <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $user->id }}">
+                    <i class="fa fa-calendar"></i>
+                </a>
+            </div>
+        @endnotself
+        @endclient
     </div>
 
     @self($user->id)

@@ -27,6 +27,11 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('active_status')->default(0);
+            $table->string('avatar')->nullable();
+            $table->boolean('dark_mode')->default(0);
+            $table->string('messenger_color')->default('#6b969d');
+            $table->json('google_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

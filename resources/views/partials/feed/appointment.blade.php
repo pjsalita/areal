@@ -40,23 +40,34 @@
             Message: {{ $appointment->message }}
         </div>
 
-        @architect
-        @if ($appointment->status === "pending" && $appointment->architect->id === auth()->id() && Carbon\Carbon::parse($appointment->start_date)->isFuture())
-            <div class="d-flex align-items-center mt-2" role="group">
-                <form action="{{ route("appointment.update", $appointment->id) }}" class="me-md-2" method="POST">
-                    @csrf
-                    @method("PUT")
-                    <input type="hidden" name="status" value="approved">
-                    <button type="submit" class="btn btn-success d-flex align-items-center"><i class="fa fa-check"></i></button>
-                </form>
-                <form action="{{ route("appointment.update", $appointment->id) }}" method="POST">
-                    @csrf
-                    @method("PUT")
-                    <input type="hidden" name="status" value="declined">
-                    <button type="submit" class="btn btn-danger d-flex align-items-center"><i class="fa fa-times"></i></button>
-                </form>
-            </div>
-        @endif
-        @endarchitect
+        <div class="d-flex align-items-center mt-2" role="group">
+            @if ($appointment->link)
+                <a href="{{ $appointment->link }}" target="_blank" class="text-decoration-none btn btn-success d-flex align-items-center me-md-2">
+                    <i class="fa fa-phone me-2"></i> Join Call
+                </a>
+            @endif
+
+            @architect
+                @if (!auth()->user()->google_token)
+                    <div class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please authenticate AReal to use your Google Calendar to confirm your appointments.">
+                        <button type="button" class="btn btn-success d-flex align-items-center me-md-2" disabled><i class="fa fa-check"></i></button>
+                        <button type="button" class="btn btn-danger d-flex align-items-center" disabled><i class="fa fa-times"></i></button>
+                    </div>
+                @elseif ($appointment->status === "pending" && $appointment->architect->id === auth()->id() && Carbon\Carbon::parse($appointment->start_date)->isFuture())
+                    <form action="{{ route("appointment.update", $appointment->id) }}" class="me-md-2" method="POST">
+                        @csrf
+                        @method("PUT")
+                        <input type="hidden" name="status" value="approved">
+                        <button type="submit" class="btn btn-success d-flex align-items-center"><i class="fa fa-check"></i></button>
+                    </form>
+                    <form action="{{ route("appointment.update", $appointment->id) }}" method="POST">
+                        @csrf
+                        @method("PUT")
+                        <input type="hidden" name="status" value="declined">
+                        <button type="submit" class="btn btn-danger d-flex align-items-center"><i class="fa fa-times"></i></button>
+                    </form>
+                @endif
+            @endarchitect
+        </div>
     </div>
 </div>

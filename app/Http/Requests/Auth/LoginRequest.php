@@ -53,6 +53,16 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        if (optional(Auth::user())->account_type === "admin") {
+            Auth::guard('web')->logout();
+
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 

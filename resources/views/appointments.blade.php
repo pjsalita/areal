@@ -7,6 +7,12 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
             <div class="col-md-9">
+                @architect
+                    @if (!auth()->user()->google_token)
+                        <a href="{{ route("google.store") }}" class="btn btn-primary mb-2 text-decoration-none"><i class="fa fa-lock"></i> Authenticate</a>
+                    @endif
+                @endarchitect
+
                 <ul class="nav nav-pills nav-fill" id="appointments">
                     <li class="nav-item">
                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#pendingAppointments" type="button" role="tab">Pending</button>

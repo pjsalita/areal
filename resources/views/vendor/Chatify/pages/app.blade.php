@@ -79,12 +79,12 @@
                 </div>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
-                    <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="#" class="book-appointment" data-bs-toggle="modal" data-bs-target="#bookAppointment">
+                    <a href="javascript:void(0)" class="add-to-favorite"><i class="fas fa-star"></i></a>
+                    <a href="javascript:void(0)" class="book-appointment" data-bs-toggle="modal" data-bs-target="#bookAppointment">
                         <i class="fa fa-calendar"></i>
                     </a>
                     {{-- <a href="{{ route('feed') }}"><i class="fas fa-home"></i></a> --}}
-                    <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    <a href="javascript:void(0)" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
         </div>
@@ -119,7 +119,7 @@
     <div class="messenger-infoView app-scroll">
         {{-- nav actions --}}
         <nav>
-            <a href="#"><i class="fas fa-times"></i></a>
+            <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
         </nav>
         {!! view('Chatify::layouts.info')->render() !!}
     </div>

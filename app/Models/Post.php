@@ -20,16 +20,34 @@ class Post extends Model implements Likeable
         'type',
     ];
 
-    protected $appends = ['model', 'model_link'];
+    protected $appends = ['model', 'image'];
 
-    public function getModelAttribute()
+    public function getModelObjectAttribute()
     {
         return $this->attachments()->models()->first();
     }
 
-    public function getModelLinkAttribute()
+    public function getImageObjectAttribute()
     {
-        return url(Storage::url("attachments/" . $this->model->filename));
+        return $this->attachments()->images()->first();
+    }
+
+    public function getModelAttribute()
+    {
+        $model = [
+            'filename' => $this->modelObject->filename,
+            'link' => url(Storage::url("attachments/" . $this->modelObject->filename))
+        ];
+        return $model;
+    }
+
+    public function getImageAttribute()
+    {
+        $image = [
+            'filename' => $this->imageObject->filename,
+            'link' => url(Storage::url("attachments/" . $this->imageObject->filename))
+        ];
+        return $image;
     }
 
     public function user()

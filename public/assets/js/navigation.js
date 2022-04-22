@@ -6,6 +6,7 @@ var menuBtn = document.querySelector('[data-role="menu-btn"]'),
     secondOverlay = document.querySelector('[data-sequence="second"]'),
     thirdOverlay = document.querySelector('[data-sequence="third"]'),
     signInLink = document.querySelector('[data-link="log-in"]'),
+    bookAppointment = document.querySelector('[data-link="book-appointment"]'),
     aboutLink = document.querySelector('[data-link="about"]'),
     ourTeamLink = document.querySelector('[data-link="our-team"]'),
     ourProjectsLink = document.querySelector('[data-link="our-projects"]'),
@@ -19,6 +20,12 @@ menuBtn.addEventListener("click", () => {
 
 signInLink?.addEventListener("click", () => {
     ToggleMenu();
+    signInForm.classList.toggle("show-modal");
+    upBtn.style.visibility = "hidden";
+    document.body.classList.toggle("stop-scroll");
+});
+
+bookAppointment?.addEventListener("click", () => {
     signInForm.classList.toggle("show-modal");
     upBtn.style.visibility = "hidden";
     document.body.classList.toggle("stop-scroll");

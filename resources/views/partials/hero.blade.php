@@ -15,9 +15,15 @@
                 <button class="action secondary" data-link="about-app">
                     LEARN MORE
                 </button>
-                <button class="action primary">
-                    BOOK APPOINTMENT
-                </button>
+                @auth
+                    <a href="{{ route("feed") }}" class="action primary" style="text-decoration: none">
+                        BOOK APPOINTMENT
+                    </a>
+                @else
+                    <button class="action primary" data-link="book-appointment">
+                        BOOK APPOINTMENT
+                    </button>
+                @endauth
             </div>
         </div>
     </div>

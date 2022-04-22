@@ -45,10 +45,12 @@ class PostController extends Controller
             'type' => $request->type,
         ]);
 
+        $time = time();
+
         if ($request->hasFile('model')) {
             $file = $request->file('model');
             $fileOriginalName = $file->getClientOriginalName();
-            $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . time();
+            $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . $time;
             $extension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
             $filename = "{$name}.{$extension}";
             $file->storeAs(config('chatify.attachments.folder'), $filename);
@@ -57,17 +59,13 @@ class PostController extends Controller
                 'filename' => $filename,
                 'type' => 'model'
             ]);
-        }
 
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
-
-            foreach ($images as $image) {
-                $fileOriginalName = $image->getClientOriginalName();
-                $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . time();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $fileOriginalName = $file->getClientOriginalName();
                 $extension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
                 $filename = "{$name}.{$extension}";
-                $image->storeAs(config('chatify.attachments.folder'), $filename);
+                $file->storeAs(config('chatify.attachments.folder'), $filename);
                 PostAttachment::create([
                     'post_id' => $post->id,
                     'filename' => $filename,

@@ -43,8 +43,8 @@
                         <label class="input-group-text" for="designFile">Model File</label>
                     </div>
                     <div class="input-group">
-                        <input type="file" name="images[]" class="form-control" id="designImages" onchange="previewImage(event)" accept=".png,.jpg,.jpeg,.svg,.gif,.bmp" multiple required>
-                        <label class="input-group-text" for="designImages">Images</label>
+                        <input type="file" name="image" class="form-control" id="designImage" onchange="previewImage(event)" accept=".png,.jpg,.jpeg,.svg,.gif,.bmp" required>
+                        <label class="input-group-text" for="designImage">Image</label>
                     </div>
                 </div>
                 <div id="previewImages" class="my-2 row"></div>
@@ -62,13 +62,13 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">
-                <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">
-                    Create post
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#createPost" type="button" role="tab" aria-controls="createPost" aria-selected="true">
+                    Create Post
                 </button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="true">
-                    Images
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#createDesign" type="button" role="tab" aria-controls="createDesign" aria-selected="true">
+                    Upload Design
                 </button>
             </li>
         </ul>
@@ -86,8 +86,8 @@
 @push("scripts")
     <script>
         const previewImage = (event) => {
-            const imageTemplate = (file) => `<div class="mb-4 col-3 position-relative">
-                <img src="${URL.createObjectURL(file)}" alt="" class="img-thumbnail" style="max-width: 100%; width: 150px; max-height: 100%; height: 150px" />
+            const imageTemplate = (file) => `<div class="mb-4 col-12 position-relative">
+                <img src="${URL.createObjectURL(file)}" alt="" class="img-thumbnail" style="max-width: 100%; max-height: 100%;" />
                 <!--<button type="button" class="btn-close position-absolute" aria-label="Close" style="top: 10px; right: 20px;"></button>!-->
             </div>`;
             const previewContainer = document.getElementById("previewImages");

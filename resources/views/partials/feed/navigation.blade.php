@@ -37,12 +37,9 @@
                     <i class="fa fa-user"></i> <span class="d-inline d-lg-none"> Profile</span>
                 </a>
 
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a href="{{ route('logout') }}" class="nav-item nav-link text-decoration-none" onclick="event.preventDefault(); this.closest('form').submit();">
-                        <i class="fa fa-sign-out"></i> <span class="d-inline d-lg-none"> Logout</span>
-                    </a>
-                </form>
+                <a href="{{ route('logout') }}" class="nav-item nav-link text-decoration-none">
+                    <i class="fa fa-sign-out"></i> <span class="d-inline d-lg-none"> Logout</span>
+                </a>
             </div>
         @else
         <div class="navbar-nav">

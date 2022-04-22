@@ -40,10 +40,7 @@
                 </li>
                 @auth
                     <li class="links">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a href="{{ route('logout') }}" class="anchor" onclick="event.preventDefault(); this.closest('form').submit();">LOGOUT</a>
-                        </form>
+                        <a href="{{ route('logout') }}" class="anchor">LOGOUT</a>
                     </li>
                 @endauth
             </ul>

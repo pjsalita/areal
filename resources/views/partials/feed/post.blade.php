@@ -63,7 +63,7 @@
 
             <div class="row">
                 @foreach ($post->attachments()->images()->get() as $attachment)
-                    <div class="mb-4 col-3 position-relative">
+                    <div class="mb-4 col-6 position-relative">
                         <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" style="max-width: 100%; max-height: 500px;" />
                         <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
                     </div>

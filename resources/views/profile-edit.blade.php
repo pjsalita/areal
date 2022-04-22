@@ -24,7 +24,10 @@
                 @endif
 
                 @include('partials.feed.update-profile', [ 'user' => $user ])
-                @include('partials.feed.achievements', [ 'achievements' => $user->achievements ])
+
+                @if ($user->account_type === "architect")
+                    @include('partials.feed.achievements', [ 'achievements' => $user->achievements ])
+                @endif
             </div>
         </div>
     </div>

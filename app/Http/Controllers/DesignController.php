@@ -22,7 +22,7 @@ class DesignController extends Controller
             return response()->json([ "message" => "Not found."], 404);
         }
 
-        $design = $design->only(['id', 'title', 'created_at', 'model', 'model_link']);
+        $design = $design->only(['id', 'title', 'created_at', 'model', 'image']);
 
         return response()->json($design);
     }

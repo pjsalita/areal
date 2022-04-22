@@ -55,7 +55,7 @@ class CommentController extends Controller
             }
         }
 
-        return redirect()->route("post.show", $post->id);
+        return redirect()->route("{$post->type}.show", $post->id);
     }
 
     /**

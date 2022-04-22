@@ -143,5 +143,16 @@
 @push('scripts')
     @guest
         <script src="{{ asset('assets/js/sign-in.js') }}"></script>
+        <script>
+            if ({{ in_array(request()->r, ["login", "signup"]) ? "true" : "false" }}) {
+                signInForm.classList.toggle("show-modal");
+                upBtn.style.visibility = "hidden";
+                document.body.classList.toggle("stop-scroll");
+
+                if ({{ request()->r === "signup" ? "true" : "false" }}) {
+                    document.querySelector(".switcher-signup")?.click();
+                }
+            }
+        </script>
     @endguest
 @endpush

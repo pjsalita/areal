@@ -40,7 +40,7 @@
         @if ($post->attachments->count())
             <div class="row">
                 @foreach ($post->attachments as $attachment)
-                    <div class="col-3 mb-4 position-relative">
+                    <div class="mb-4 col-3 position-relative">
                         @if ($attachment->type === "image")
                             <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" />
                             <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
@@ -65,9 +65,15 @@
                 </a>
             @endcan
         @else
-            <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your email address to like and comment">
-                <i class="fa fa-gittip me-1"></i> Like <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
-            </a>
+            @auth
+                <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your email address to like and comment.">
+                    <i class="fa fa-gittip me-1"></i> Like <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
+                </a>
+            @else
+                <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Login or register to like and comment.">
+                    <i class="fa fa-gittip me-1"></i> Like <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
+                </a>
+            @endauth
         @endverified
 
         <a href="javascript:void(0)" onClick="toggleComment({{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none">
@@ -90,9 +96,15 @@
                 <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
             </form>
         @else
-            <div class="p-2 bg-gray">
-                <small>Verify your email address to like and comment.</small>
-            </div>
+            @auth
+                <div class="p-2 bg-gray">
+                    <small>Verify your email address to like and comment.</small>
+                </div>
+            @else
+                <div class="p-2 bg-gray">
+                    <small>Login or register to like and comment.</small>
+                </div>
+            @endauth
         @endverified
     </div>
 </div>

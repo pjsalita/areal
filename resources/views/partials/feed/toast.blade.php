@@ -1,6 +1,7 @@
 <div class="bottom-0 p-3 toast-container position-fixed end-0" id="notificationToast" style="z-index: 11"></div>
 
 @push('scripts')
+@auth
     <script>
         const notificationTemplate = (notification) => `<div class="toast" id="${notification.id}" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header position-relative">
@@ -46,4 +47,5 @@
                 toast.show();
             });
     </script>
+@endauth
 @endpush

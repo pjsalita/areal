@@ -93,11 +93,9 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        if (in_array(auth()->id(), [$appointment->architect_id, $appointment->user_id])) {
-            return view("appointment", compact('appointment'));
-        }
+        abort_if(!in_array(auth()->id(), [$appointment->architect_id, $appointment->user_id]), 404);
 
-        return abort(404);
+        return view("appointment", compact('appointment'));
     }
 
     /**

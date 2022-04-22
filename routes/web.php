@@ -25,6 +25,9 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
@@ -38,9 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/google/auth', [GoogleAccountController::class, 'store'])->name('google.store');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
-    Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 

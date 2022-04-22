@@ -16,9 +16,8 @@ class ProfileController extends Controller
 
     public function show(User $user)
     {
-        if ($user->account_type === "admin") {
-            abort(404);
-        }
+        $isAdmin = $user->account_type === "admin";
+        abort_if($isAdmin, 404);
 
         return view('profile', compact('user'));
     }

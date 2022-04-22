@@ -21,7 +21,6 @@ const accountTypeHandler = () => {
 
 accountTypeHandler();
 
-
 async function login(e) {
     e.preventDefault();
     const formData = new FormData(e.target);

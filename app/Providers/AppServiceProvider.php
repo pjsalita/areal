@@ -42,11 +42,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::if('self', function ($id) {
-            return $id && auth()->id() === $id;
+            return $id && optional(auth())->id() === $id;
         });
 
         Blade::if('notself', function ($id) {
-            return $id && auth()->id() !== $id;
+            return $id && optional(auth())->id() !== $id;
         });
 
         Blade::if('verified', function () {

@@ -32,10 +32,30 @@
             </div>
         @endnotself
         @endclient
+
+        @guest
+        @if ($user->account_type === "architect")
+            <div class="mt-2">
+                <a href="{{ route("home") }}/?r=login" id="openChat" class="card-link text-decoration-none">
+                    <i class="fa fa-comments"></i>
+                </a>
+                <a href="{{ route("home") }}/?r=login" class="card-link text-decoration-none">
+                    <i class="fa fa-calendar"></i>
+                </a>
+                <p>
+                    Login or register to chat and book appointment.
+                </p>
+            </div>
+        @endif
+        @endguest
     </div>
 
-    @self($user->id)
-        <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="h6 text-muted">On Going Projects</div>
+            <div class="h5">5</div>
+        </li>
+        @self($user->id)
             <li class="list-group-item">
                 <div class="h6 text-muted">Meeting Schedule</div>
                 @client
@@ -72,7 +92,6 @@
                     @endforelse
                 @endarchitect
             </li>
-        </ul>
-    @endself
-
+        @endself
+    </ul>
 </div>

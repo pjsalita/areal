@@ -20,6 +20,13 @@ nav {
     border-color: $turquoise;
 }
 
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: $white-crisped;
+    background-color: $turquoise;
+    border-color: $turquoise;
+    box-shadow: 0 0 0 0.25rem rgb(107 150 157 / 50%);
+}
+
 .btn-outline-primary {
     color: $turquoise-dark;
     background-color: transparent;

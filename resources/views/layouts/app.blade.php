@@ -33,6 +33,20 @@
         {{-- <script src="{{ asset('assets/js/popup.js') }}"></script> --}}
         <script src="{{ asset('assets/js/app.js') }}"></script>
 
+        <script>
+            function downloadQr(event, title) {
+                html2canvas((event.target.parentElement.firstElementChild)).then((canvas) => downloadURI(canvas.toDataURL(), title + ".png"))
+            }
+
+            function downloadURI(uri, name) {
+                const link = document.createElement("a");
+                link.download = name;
+                link.href = uri;
+                const node = document.body.appendChild(link);
+                link.click();
+                node.remove();
+            }
+        </script>
         @stack('scripts')
     </body>
 </html>

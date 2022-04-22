@@ -1,12 +1,16 @@
 <div class="mb-2 card">
     <div class="card-body">
-        <img src="{{ $user->profile_photo }}" alt="..."
-            class="img-thumbnail w-100">
+        <img src="{{ $user->profile_photo }}" alt="" class="img-thumbnail w-100">
         <div class="mt-2 mb-0 h5">
-            <a href="{{ route('profile.show', $user->id) }}">{{ $user->name }}</a>
+            <a href="{{ route('profile.show', $user->id) }}" class="text-capitalize">{{ $user->name }}</a>
             @if($user->hasVerifiedEmail())
                 <i class="ms-1 fa fa-check-circle"></i>
             @endif
+            @self($user->id)
+                <a href="{{ route('profile.edit') }}" class="">
+                    <i class="ms-1 fa fa-pencil"></i>
+                </a>
+            @endself
         </div>
         <div class="text-capitalize h6">{{ $user->position }}</div>
 
@@ -17,7 +21,7 @@
         <div class="h7 text-muted">Email : <a href="mailto:{{ $user->email }}">{{ $user->email }}</a></div>
 
         @if($user->address)
-            <div class="h7 text-muted">Address : Blk 10 Lot 8 Sapang matakla, Planet Namec</div>
+            <div class="h7 text-muted">Address : {{ $user->address }}</div>
         @endif
 
         @client
@@ -51,10 +55,13 @@
     </div>
 
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="h6 text-muted">On Going Projects</div>
-            <div class="h5">5</div>
-        </li>
+        @foreach ($user->achievements as $achievement)
+            <li class="list-group-item">
+                <div class="h6 text-muted text-capitalize">{{ $achievement->name }}</div>
+                <div class="h5">{{ $achievement->value }}</div>
+            </li>
+        @endforeach
+
         @self($user->id)
             <li class="list-group-item">
                 <div class="h6 text-muted">Meeting Schedule</div>

@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
                 ->onDelete('cascade');
             $table->string('title')->nullable();
             $table->longText('body')->nullable();
+            $table->enum('type', ['post', 'design'])->default('post');
             $table->timestamps();
             $table->softDeletes();
         });

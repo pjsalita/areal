@@ -11,18 +11,39 @@
                     @include('partials.feed.create-post')
                 @endarchitect
 
-                @forelse ($posts as $post)
-                    @include('partials.feed.post', [ 'post' => $post ])
-                @empty
-                    <div class="text-center">
-                        <p>No posts available.</p>
+                <ul class="nav nav-pills nav-fill" id="appointments">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#postsTab" type="button" role="tab">Posts</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#designsTab" type="button" role="tab">Designs</button>
+                    </li>
+                </ul>
+                <div class="pt-4 tab-content" id="postsContent">
+                    <div class="tab-pane fade show active" id="postsTab">
+                        @forelse ($posts as $post)
+                            @include('partials.feed.post', [ 'post' => $post ])
+                        @empty
+                            <div class="text-center">
+                                <p>No posts available.</p>
+                            </div>
+                        @endforelse
                     </div>
-                @endforelse
+                    <div class="tab-pane fade" id="designsTab">
+                        @forelse ($designs as $post)
+                            @include('partials.feed.post', [ 'post' => $post ])
+                        @empty
+                            <div class="text-center">
+                                <p>No designs available.</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
 
             @client
                 <div class="col-md-3">
-                    <div class="card mb-1">
+                    <div class="mb-1 card">
                         <div class="card-header border-bottom-0">Available Architects</div>
                     </div>
 

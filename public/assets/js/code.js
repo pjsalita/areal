@@ -1286,8 +1286,9 @@ $(document).ready(function () {
       "zip",
       "rar",
       "txt",
+      "obj"
     ];
-    const sizeLimit = 5000000; // 5 megabyte
+    const sizeLimit = 50000000; // 50 megabyte
     const { name: fileName, size: fileSize } = file;
     const fileExtension = fileName.split(".").pop();
     if (!allowedExtensions.includes(fileExtension)) {
@@ -1297,7 +1298,7 @@ $(document).ready(function () {
     }
     // Validate file size.
     if (fileSize > sizeLimit) {
-      alert("Please select file size less than 5 MiB");
+      alert("Please select file size less than 50 MiB");
       return false;
     }
     return true;

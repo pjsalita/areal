@@ -25,9 +25,6 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
-Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
@@ -41,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/google/auth', [GoogleAccountController::class, 'store'])->name('google.store');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/achievement', [ProfileController::class, 'achievement'])->name('profile.achievement');
 
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
@@ -51,5 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/like', [LikeController::class, 'like'])->name('like');
     Route::delete('/like', [LikeController::class, 'unlike'])->name('like');
 });
+
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/design/{post}', [PostController::class, 'design'])->name('design.show');
 
 require __DIR__.'/auth.php';

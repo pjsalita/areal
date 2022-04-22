@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Contracts\Likeable;
 use App\Models\Concerns\Likes;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model implements Likeable
 {
@@ -16,7 +17,20 @@ class Post extends Model implements Likeable
         'user_id',
         'title',
         'body',
+        'type',
     ];
+
+    protected $appends = ['model', 'model_link'];
+
+    public function getModelAttribute()
+    {
+        return $this->attachments()->models()->first();
+    }
+
+    public function getModelLinkAttribute()
+    {
+        return url(Storage::url("attachments/" . $this->model->filename));
+    }
 
     public function user()
     {
@@ -31,5 +45,15 @@ class Post extends Model implements Likeable
     public function attachments()
     {
         return $this->hasMany(PostAttachment::class)->orderBy('created_at', 'desc');
+    }
+
+    public function scopePosts($query)
+    {
+        return $query->where('type', 'post');
+    }
+
+    public function scopeDesigns($query)
+    {
+        return $query->where('type', 'design');
     }
 }

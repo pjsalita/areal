@@ -10,9 +10,10 @@ class FeedController extends Controller
 {
     public function index()
     {
-        $posts = Post::all()->sortByDesc('created_at');
+        $posts = Post::posts()->get()->sortByDesc('created_at');
+        $designs = Post::designs()->get()->sortByDesc('created_at');
         $architects = User::verified()->architects()->get();
 
-        return view('feed', compact('posts', 'architects'));
+        return view('feed', compact('posts', 'designs', 'architects'));
     }
 }

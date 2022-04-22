@@ -15,6 +15,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Echo from 'laravel-echo';
 
+window.html2canvas = require('html2canvas');
 window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',

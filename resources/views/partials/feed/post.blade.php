@@ -15,8 +15,23 @@
                 </div>
             </div>
 
-            @self($post->user->id)
-                <div class="float-right">
+            <div class="float-right btn-group">
+                <div data-bs-toggle="dropdown">
+                    <button class="btn btn-link dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Get QR Code.">
+                        <i class="fa fa-qrcode"></i>
+                    </button>
+                </div>
+                <div class="p-0 dropdown-menu">
+                    <div class="d-flex flex-column">
+                        <div class="qrcode img-thumbnail">
+                            {!! QrCode::size(250)->generate(url("/{$post->type}/{$post->id}")) !!}
+                        </div>
+                        <button class="btn btn-primary" onclick="downloadQr(event, '{{ $post->title }}')">
+                            Download QR Code
+                        </button>
+                    </div>
+                </div>
+                @self($post->user->id)
                     <form action="{{ route("post.destroy", $post->id) }}" method="POST">
                         @csrf
                         @method("DELETE")
@@ -24,27 +39,33 @@
                             <i class="fa fa-trash"></i>
                         </button>
                     </form>
-                </div>
-            @endself
+                @endself
+            </div>
         </div>
     </div>
 
     <div class="card-body">
         <div class="mb-2 text-muted h7"> <i class="fa fa-clock-o"></i> {{ $post->created_at->diffForHumans() }} ({{ $post->created_at->toDateTimeString() }})</div>
-        <a class="card-link" href="{{ route("post.show", $post->id) }}">
+        <a class="card-link" href="{{ route("{$post->type}.show", $post->id) }}">
             <h5 class="card-title d-inline-block">{{ $post->title }}</h5>
         </a>
 
         <p class="card-text">{{ $post->body }}</p>
 
+
+
         @if ($post->attachments->count())
+            @foreach ($post->attachments()->models()->get() as $attachment)
+                <a href="{{ $attachment->file }}" class="file-download text-decoration-none">
+                    <span class="fa fa-file"></span> {{ $attachment->filename }}
+                </a>
+            @endforeach
+
             <div class="row">
-                @foreach ($post->attachments as $attachment)
+                @foreach ($post->attachments()->images()->get() as $attachment)
                     <div class="mb-4 col-3 position-relative">
-                        @if ($attachment->type === "image")
-                            <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" />
-                            <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
-                        @endif
+                        <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" style="max-width: 100%; max-height: 500px;" />
+                        <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
                     </div>
                 @endforeach
             </div>
@@ -81,7 +102,7 @@
         </a>
     </div>
 
-    <div id="post-comments-{{ $post->id }}" class="comment-container {{ request()->routeIs("post.show") ? "" : "d-none"}}">
+    <div id="post-comments-{{ $post->id }}" class="comment-container {{ request()->routeIs("{$post->type}.show") ? "" : "d-none"}}">
         @foreach($post->comments as $comment)
             @include("partials.feed.comment", [ 'comment' => $comment ])
         @endforeach

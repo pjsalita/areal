@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDesignsTable extends Migration
+class CreateAchievementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateDesignsTable extends Migration
      */
     public function up()
     {
-        Schema::create('designs', function (Blueprint $table) {
+        Schema::create('achievements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->string('name')->nullable();
+            $table->string('value')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,6 +32,6 @@ class CreateDesignsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('designs');
+        Schema::dropIfExists('achievements');
     }
 }

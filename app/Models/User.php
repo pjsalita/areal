@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'account_type',
         'gender',
         'address',
-        'google_token'
+        'google_token',
     ];
 
     /**
@@ -59,12 +59,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = ['name', 'profile_photo'];
 
     public function getNameAttribute() {
-        return "{$this->first_name} {$this->last_name}";
+        $middle_name = $this->middle_name ? "{$this->middle_name} " : "";
+        return "{$this->first_name} {$middle_name}{$this->last_name}";
     }
 
     public function posts()
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class)->orderBy('created_at', 'asc');
     }
 
     public function clientAppointments()

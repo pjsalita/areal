@@ -25,4 +25,14 @@ class PostAttachment extends Model
     {
         return Storage::url("attachments/" . $this->filename);
     }
+
+    public function scopeImages($query)
+    {
+        return $query->where('type', 'image');
+    }
+
+    public function scopeModels($query)
+    {
+        return $query->where('type', 'model');
+    }
 }

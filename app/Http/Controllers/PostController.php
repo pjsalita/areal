@@ -42,18 +42,35 @@ class PostController extends Controller
             'user_id' => auth()->id(),
             'title' => $request->title,
             'body' => $request->body,
+            'type' => $request->type,
         ]);
+
+        if ($request->hasFile('model')) {
+            $file = $request->file('model');
+            $fileOriginalName = $file->getClientOriginalName();
+            $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . time();
+            $extension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
+            $filename = "{$name}.{$extension}";
+            $file->storeAs(config('chatify.attachments.folder'), $filename);
+            PostAttachment::create([
+                'post_id' => $post->id,
+                'filename' => $filename,
+                'type' => 'model'
+            ]);
+        }
 
         if ($request->hasFile('images')) {
             $images = $request->file('images');
 
             foreach ($images as $image) {
-                // $image_title = $image->getClientOriginalName();
-                $image_name = Str::uuid() . "." . $image->getClientOriginalExtension();
-                $image->storeAs(config('chatify.attachments.folder'), $image_name);
+                $fileOriginalName = $image->getClientOriginalName();
+                $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . time();
+                $extension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
+                $filename = "{$name}.{$extension}";
+                $image->storeAs(config('chatify.attachments.folder'), $filename);
                 PostAttachment::create([
                     'post_id' => $post->id,
-                    'filename' => $image_name,
+                    'filename' => $filename,
                 ]);
             }
         }
@@ -69,6 +86,13 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        abort_if($post->type !== "post", 404);
+        return view('post', compact('post'));
+    }
+
+    public function design(Post $post)
+    {
+        abort_if($post->type !== "design", 404);
         return view('post', compact('post'));
     }
 

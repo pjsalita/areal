@@ -1,48 +1,64 @@
 <!--- Markup for Create Post-->
 @verified
-<div class="card mb-5">
+<div class="mb-5 card">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">
-                <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">
-                    Create post
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#createPost" type="button" role="tab" aria-controls="createPost" aria-selected="true">
+                    Create Post
                 </button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="true">
-                    Images
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#createDesign" type="button" role="tab" aria-controls="createDesign" aria-selected="true">
+                    Upload Design
                 </button>
             </li>
         </ul>
     </div>
-    <form class="card-body" method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="tab-content" id="myPostTabContent">
-            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+
+    <div class="tab-content" id="myPostTabContent">
+        <div class="tab-pane fade show active" id="createPost" role="tabpanel">
+            <form class="card-body" method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="type" value="post">
                 <div class="form-group">
-                    <label class="sr-only" for="message">post</label>
                     <input class="mb-2 form-control" name="title" placeholder="Subject" required/>
                     <textarea class="form-control" name="body" id="message" rows="3" placeholder="What are you thinking?"></textarea>
                 </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">Publish Post</button>
+                </div>
+            </form>
+        </div>
 
-            </div>
-            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                <div class="input-group">
-                    <input type="file" name="images[]" class="form-control" id="customFile" onchange="previewImage(event)" accept=".png,.jpg,.jpeg,.svg,.gif,.bmp" multiple>
-                    <label class="input-group-text" for="customFile">Upload</label>
-                  </div>
-            </div>
-            <div id="previewImages" class="row my-3"></div>
+        <div class="tab-pane fade" id="createDesign" role="tabpanel">
+            <form class="card-body" method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="type" value="design">
+                <div class="form-group">
+                    <input class="mb-2 form-control" name="title" placeholder="Design Name" required/>
+                    <textarea class="mb-2 form-control" name="body" id="message" rows="3" placeholder="Design Description"></textarea>
+                    <div class="mb-2 input-group">
+                        <input type="file" name="model" class="form-control" id="designFile" accept=".obj" required>
+                        <label class="input-group-text" for="designFile">Model File</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="file" name="images[]" class="form-control" id="designImages" onchange="previewImage(event)" accept=".png,.jpg,.jpeg,.svg,.gif,.bmp" multiple required>
+                        <label class="input-group-text" for="designImages">Images</label>
+                    </div>
+                </div>
+                <div id="previewImages" class="my-2 row"></div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">Publish Design</button>
+                </div>
+            </form>
         </div>
-        <div class="mt-2">
-            <button type="submit" class="btn btn-primary">Post</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 @else
 
-<div class="card mb-5">
+<div class="mb-5 card">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
             <li class="nav-item">
@@ -70,8 +86,8 @@
 @push("scripts")
     <script>
         const previewImage = (event) => {
-            const imageTemplate = (file) => `<div class="col-3 mb-4 position-relative">
-                <img src="${URL.createObjectURL(file)}" alt="" class="img-thumbnail w-100 h-100" />
+            const imageTemplate = (file) => `<div class="mb-4 col-3 position-relative">
+                <img src="${URL.createObjectURL(file)}" alt="" class="img-thumbnail" style="max-width: 100%; width: 150px; max-height: 100%; height: 150px" />
                 <!--<button type="button" class="btn-close position-absolute" aria-label="Close" style="top: 10px; right: 20px;"></button>!-->
             </div>`;
             const previewContainer = document.getElementById("previewImages");

@@ -1,5 +1,5 @@
 <!--- Markup for Create Post-->
-@verified
+@activated
 <div class="mb-5 card">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myPostTab" role="tablist">
@@ -38,6 +38,20 @@
                 <div class="form-group">
                     <input class="mb-2 form-control" name="title" placeholder="Design Name" required/>
                     <textarea class="mb-2 form-control" name="body" id="message" rows="3" placeholder="Design Description"></textarea>
+                    <div class="mb-2 row row-cols-lg-auto justify-content-between align-items-center">
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="measurements[height]" placeholder="Height" required>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="measurements[length]" placeholder="Length" required>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="measurements[width]" placeholder="Width" required>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="measurements[square_meters]" placeholder="Sq. Meters" required>
+                        </div>
+                    </div>
                     <div class="mb-2 input-group">
                         <input type="file" name="model" class="form-control" id="designFile" accept=".obj" required>
                         <label class="input-group-text" for="designFile">Model File</label>
@@ -76,12 +90,12 @@
     <div class="card-body">
         <div class="tab-content" id="myPostTabContent">
             <div class="m-0 alert alert-warning" role="alert">
-                Verify your email address to post.
+                Your email address and PRC ID must be verified to post.
             </div>
         </div>
     </div>
 </div>
-@endverified
+@endactivated
 
 @push("scripts")
     <script>

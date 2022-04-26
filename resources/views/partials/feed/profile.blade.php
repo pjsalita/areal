@@ -4,9 +4,24 @@
         <div class="mt-2 mb-0 h5">
             <a href="{{ route('profile.show', $user->id) }}" class="text-capitalize">{{ $user->name }}</a>
             @if($user->hasVerifiedEmail())
-                <i class="ms-1 fa fa-check-circle"></i>
+                @if($user->account_type === "architect")
+                    @if($user->prc_verified)
+                        <i class="ms-1 fa fa-check-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Email and PRC verified."></i>
+                    @endif
+                @else
+                    <i class="ms-1 fa fa-check-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Email verified."></i>
+                @endif
             @endif
             @self($user->id)
+                @unverified
+                    <form action="{{ route('profile.resend') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="p-0 btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Resend verification link." style="outline: none; color: #296e6b; font-size: 1.25rem; vertical-align: unset; line-height: 1.2;">
+                            <i class="ms-1 fa fa-envelope"></i>
+                        </button>
+                    </form>
+                @endunverified
+
                 <a href="{{ route('profile.edit') }}" class="">
                     <i class="ms-1 fa fa-pencil"></i>
                 </a>
@@ -63,9 +78,9 @@
         @endforeach
 
         @self($user->id)
-            <li class="list-group-item">
-                <div class="h6 text-muted">Meeting Schedule</div>
-                @client
+            @client
+                <li class="list-group-item">
+                    <div class="h6 text-muted">Meeting Schedule</div>
                     @forelse ($user->clientAppointments()->approvedAppointments()->futureAppointments()->selectRaw('*, Date(start_date) as date')->get()->groupBy('date') as $date => $appointments)
                         <div class="mb-3">
                             <div class="h5">{{ Carbon\Carbon::parse($date)->format('F d, Y') }}</div>
@@ -80,9 +95,12 @@
                     @empty
                         <div class="h7">No upcoming appointments</div>
                     @endforelse
-                @endclient
+                </li>
+            @endclient
 
-                @architect
+            @architect
+                <li class="list-group-item">
+                    <div class="h6 text-muted">Meeting Schedule</div>
                     @forelse ($user->architectAppointments()->approvedAppointments()->futureAppointments()->selectRaw('*, Date(start_date) as date')->get()->groupBy('date') as $date => $appointments)
                         <div class="mb-3">
                             <div class="h5">{{ Carbon\Carbon::parse($date)->format('F d, Y') }}</div>
@@ -97,8 +115,8 @@
                     @empty
                         <div class="h7">No upcoming appointments</div>
                     @endforelse
-                @endarchitect
-            </li>
+                </li>
+            @endarchitect
         @endself
     </ul>
 </div>

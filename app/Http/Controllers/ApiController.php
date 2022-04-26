@@ -12,7 +12,7 @@ class ApiController extends Controller
     {
         $designs = Post::designs()->get();
         $designs = $designs->map(function ($design) {
-            return $design->only(['id', 'user_id', 'architect_name', 'title', 'model', 'image', 'created_at']);
+            return $design->only(['id', 'user_id', 'architect_name', 'title', 'measurements', 'model', 'image', 'created_at']);
         });
 
         return response()->json($designs);
@@ -26,7 +26,7 @@ class ApiController extends Controller
             return response()->json([ "message" => "Not found."], 404);
         }
 
-        $design = $design->only(['id', 'user_id', 'architect_name', 'title', 'model', 'image', 'created_at']);
+        $design = $design->only(['id', 'user_id', 'architect_name', 'title', 'measurements', 'model', 'image', 'created_at']);
 
         return response()->json($design);
     }
@@ -36,7 +36,7 @@ class ApiController extends Controller
         $users = User::architects()->get();
         $users = $users->map(function ($user) {
             $designs = $user->posts()->designs()->get()->map(function ($design) {
-                return $design->only(['id', 'title', 'model', 'image', 'created_at']);
+                return $design->only(['id', 'title', 'measurements', 'model', 'image', 'created_at']);
             });
 
             return collect($user->only([
@@ -57,7 +57,7 @@ class ApiController extends Controller
     public function userDesign(User $user)
     {
         $designs = $user->posts()->designs()->get()->map(function ($design) {
-            return $design->only(['id', 'user_id', 'architect_name', 'title', 'model', 'image', 'created_at']);
+            return $design->only(['id', 'user_id', 'architect_name', 'title', 'measurements', 'model', 'image', 'created_at']);
         });
 
         return response()->json($designs);

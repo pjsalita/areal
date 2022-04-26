@@ -40,7 +40,7 @@
             Message: {{ $appointment->message }}
         </div>
 
-        <div class="d-flex align-items-center mt-2" role="group">
+        <div class="mt-2 d-flex align-items-center" role="group">
             @if ($appointment->link)
                 <a href="{{ $appointment->link }}" target="_blank" class="text-decoration-none btn btn-success d-flex align-items-center me-md-2">
                     <i class="fa fa-phone me-2"></i> Join Call
@@ -48,12 +48,7 @@
             @endif
 
             @architect
-                @if (!auth()->user()->google_token)
-                    <div class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please authenticate AReal to use your Google Calendar to confirm your appointments.">
-                        <button type="button" class="btn btn-success d-flex align-items-center me-md-2" disabled><i class="fa fa-check"></i></button>
-                        <button type="button" class="btn btn-danger d-flex align-items-center" disabled><i class="fa fa-times"></i></button>
-                    </div>
-                @elseif ($appointment->status === "pending" && $appointment->architect->id === auth()->id() && Carbon\Carbon::parse($appointment->start_date)->isFuture())
+                @if ($appointment->status === "pending" && $appointment->architect->id === auth()->id() && Carbon\Carbon::parse($appointment->start_date)->isFuture())
                     <form action="{{ route("appointment.update", $appointment->id) }}" class="me-md-2" method="POST">
                         @csrf
                         @method("PUT")

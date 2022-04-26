@@ -43,6 +43,7 @@ class PostController extends Controller
             'title' => $request->title,
             'body' => $request->body,
             'type' => $request->type,
+            'measurements' => $request->measurements,
         ]);
 
         $time = time();

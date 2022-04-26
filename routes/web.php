@@ -9,6 +9,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\GoogleAccountController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+        Route::post('/admin/verify/{user}', [AdminController::class, 'verifyEmail'])->name('admin.verify');
+        Route::post('/admin/prc-verify/{user}', [AdminController::class, 'verifyPrc'])->name('admin.prc-verify');
+        Route::post('/admin/unverify/{user}', [AdminController::class, 'unverifyEmail'])->name('admin.unverify');
+        Route::post('/admin/prc-unverify/{user}', [AdminController::class, 'unverifyPrc'])->name('admin.prc-unverify');
+    });
+
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
@@ -38,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/google/auth', [GoogleAccountController::class, 'store'])->name('google.store');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/resend', [ProfileController::class, 'resend'])->name('profile.resend');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/achievement', [ProfileController::class, 'achievement'])->name('profile.achievement');

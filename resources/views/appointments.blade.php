@@ -7,11 +7,11 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
             <div class="col-md-9">
-                @architect
+                {{-- @architect
                     @if (!auth()->user()->google_token)
-                        <a href="{{ route("google.store") }}" class="btn btn-primary mb-2 text-decoration-none"><i class="fa fa-lock"></i> Authenticate</a>
+                        <a href="{{ route("google.store") }}" class="mb-2 btn btn-primary text-decoration-none"><i class="fa fa-lock"></i> Authenticate</a>
                     @endif
-                @endarchitect
+                @endarchitect --}}
 
                 <ul class="nav nav-pills nav-fill" id="appointments">
                     <li class="nav-item">
@@ -27,11 +27,11 @@
                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#historyAppointments" type="button" role="tab">History</button>
                     </li>
                 </ul>
-                <div class="tab-content pt-4" id="appointmentsContent">
+                <div class="pt-4 tab-content" id="appointmentsContent">
                     <div class="tab-pane fade show active" id="pendingAppointments">
                         <div class="row">
                             @forelse ($pendingAppointments as $appointment)
-                                <div class="col-4 mb-2">
+                                <div class="mb-2 col-4">
                                     @include('partials.feed.appointment', [ 'appointment' => $appointment, 'classNames' => 'h-100' ])
                                 </div>
                             @empty
@@ -44,7 +44,7 @@
                     <div class="tab-pane fade" id="upcomingAppointments">
                         <div class="row">
                             @forelse ($upcomingAppointments as $appointment)
-                                <div class="col-4 mb-2">
+                                <div class="mb-2 col-4">
                                     @include('partials.feed.appointment', [ 'appointment' => $appointment, 'classNames' => 'h-100' ])
                                 </div>
                             @empty
@@ -57,7 +57,7 @@
                     <div class="tab-pane fade" id="ongoingAppointments">
                         <div class="row">
                             @forelse ($ongoingAppointments as $appointment)
-                                <div class="col-4 mb-2">
+                                <div class="mb-2 col-4">
                                     @include('partials.feed.appointment', [ 'appointment' => $appointment, 'classNames' => 'h-100' ])
                                 </div>
                             @empty
@@ -70,7 +70,7 @@
                     <div class="tab-pane fade" id="historyAppointments">
                         <div class="row">
                             @forelse ($historyAppointments as $appointment)
-                                <div class="col-4 mb-2">
+                                <div class="mb-2 col-4">
                                     @include('partials.feed.appointment', [ 'appointment' => $appointment, 'classNames' => 'h-100' ])
                                 </div>
                             @empty
@@ -84,8 +84,8 @@
 
                 {{-- <div class="row">
                     <div class="col-md-6">
-                        <div class="card mb-1">
-                            <div class="card-header border-bottom-0 bg-success text-white">Approved</div>
+                        <div class="mb-1 card">
+                            <div class="text-white card-header border-bottom-0 bg-success">Approved</div>
                         </div>
                         <div style="overflow: auto; max-height: 500px">
                             @forelse ($approvedAppointments as $appointment)
@@ -99,8 +99,8 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="card mb-1">
-                            <div class="card-header border-bottom-0 bg-danger text-white">Declined</div>
+                        <div class="mb-1 card">
+                            <div class="text-white card-header border-bottom-0 bg-danger">Declined</div>
                         </div>
                         <div style="overflow: auto; max-height: 500px">
                             @forelse ($declinedAppointments as $appointment)
@@ -113,9 +113,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="mt-5 row">
                     <div class="col-md-6">
-                        <div class="card mb-1">
+                        <div class="mb-1 card">
                             <div class="card-header border-bottom-0">Pending</div>
                         </div>
                         <div style="overflow: auto; max-height: 500px">
@@ -130,7 +130,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="card mb-1">
+                        <div class="mb-1 card">
                             <div class="card-header border-bottom-0">History</div>
                         </div>
                         <div style="overflow: auto; max-height: 500px">

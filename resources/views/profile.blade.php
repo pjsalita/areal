@@ -20,12 +20,12 @@
 
                     <div class="btn-group ms-2">
                         <div data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Get Profile QR Codes." aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle" type="button">
                                 <i class="fa fa-qrcode"></i>
                             </button>
                         </div>
                         <ul class="dropdown-menu">
-                            <li>
+                            {{-- <li>
                                 <button class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                                     Profile QR Code
                                 </button>
@@ -39,7 +39,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li>
                                 <div data-bs-toggle="dropdown">
                                     <button class="dropdown-item dropdown-toggle">

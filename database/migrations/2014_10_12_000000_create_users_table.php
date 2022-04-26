@@ -27,6 +27,8 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('prc_id')->nullable();
+            $table->boolean('prc_verified')->default(0);
             $table->boolean('active_status')->default(0);
             $table->string('avatar')->nullable();
             $table->boolean('dark_mode')->default(0);

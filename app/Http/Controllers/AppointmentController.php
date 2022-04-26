@@ -116,38 +116,14 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment, Google $google)
+    public function update(Request $request, Appointment $appointment)
     {
         if ($request->status === 'approved') {
-            $service = $google->connectUsing($request->user()->google_token)->service('Calendar');
-            $event = $google->connectUsing($request->user()->google_token)->service('Calendar_Event');
-
-            $event->summary = 'AReal Appointment';
-            $event->description = "An appointment between {$appointment->architect->name} & {$appointment->client->name}";
-            $event->start = [ 'dateTime' => Carbon::parse($appointment->start_date) ];
-            $event->end = [ 'dateTime' => Carbon::parse($appointment->end_date) ];
-            $event->attendees = [
-                [
-                    'email' => $appointment->architect->email,
-                    'name' => $appointment->architect->name,
-                    'comment' => 'Architect',
-                ],
-                [
-                    'email' => $appointment->client->email,
-                    'name' => $appointment->client->name,
-                    'comment' => 'Client',
-                ]
-            ];
-
-            $event->conferenceData = [
-                'createRequest' => [
-                    'requestId' => time()
-                ]
-            ];
-
-            $calendarEvent = $service->events->insert(collect($service->calendarList->listCalendarList())->first()->id, $event, ['conferenceDataVersion' => 1]);
-
-            $appointment->link = $calendarEvent->hangoutLink;
+            try {
+                $appointment->link = $this->generateEventLink($request, $appointment);
+            } catch (\Throwable $th) {
+                $appointment->link = $this->generateEventLink($request, $appointment, true);
+            }
         }
 
         $appointment->status = $request->status;
@@ -166,5 +142,45 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    private function generateEventLink(Request $request, Appointment $appointment, $useDefault = false)
+    {
+        $google = new Google();
+
+        if ($useDefault) {
+            $service = $google->connectUsing(config('services.google.default_token'))->service('Calendar');
+            $event = $google->connectUsing(config('services.google.default_token'))->service('Calendar_Event');
+        } else {
+            $service = $google->connectUsing(config('services.google.default_token'))->service('Calendar');
+            $event = $google->connectUsing(config('services.google.default_token'))->service('Calendar_Event');
+        }
+
+        $event->summary = 'AReal Appointment';
+        $event->description = "An appointment between {$appointment->architect->name} & {$appointment->client->name}";
+        $event->start = [ 'dateTime' => Carbon::parse($appointment->start_date) ];
+        $event->end = [ 'dateTime' => Carbon::parse($appointment->end_date) ];
+        $event->attendees = [
+            [
+                'email' => $appointment->architect->email,
+                'name' => $appointment->architect->name,
+                'comment' => 'Architect',
+            ],
+            [
+                'email' => $appointment->client->email,
+                'name' => $appointment->client->name,
+                'comment' => 'Client',
+            ]
+        ];
+
+        $event->conferenceData = [
+            'createRequest' => [
+                'requestId' => time()
+            ]
+        ];
+
+        $calendarEvent = $service->events->insert(collect($service->calendarList->listCalendarList())->first()->id, $event, ['conferenceDataVersion' => 1]);
+
+        return $calendarEvent->hangoutLink;
     }
 }

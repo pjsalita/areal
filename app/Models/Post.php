@@ -18,9 +18,19 @@ class Post extends Model implements Likeable
         'title',
         'body',
         'type',
+        'measurements',
     ];
 
     protected $appends = ['model', 'image', 'architect_name'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'measurements' => 'object',
+    ];
 
     public function getArchitectNameAttribute()
     {

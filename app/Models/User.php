@@ -34,6 +34,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender',
         'address',
         'google_token',
+        'prc_verified',
+        'prc_id'
     ];
 
     /**
@@ -119,6 +121,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeArchitects($query)
     {
         return $query->where('account_type', 'architect');
+    }
+
+    public function scopePrcVerified($query)
+    {
+        return $query->where('prc_verified', true);
     }
 
     public function scopeVerified($query)

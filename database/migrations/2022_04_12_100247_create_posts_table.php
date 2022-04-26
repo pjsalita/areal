@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('title')->nullable();
             $table->longText('body')->nullable();
             $table->enum('type', ['post', 'design'])->default('post');
+            $table->json('measurements')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

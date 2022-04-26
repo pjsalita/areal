@@ -12,7 +12,7 @@ class FeedController extends Controller
     {
         $posts = Post::posts()->get()->sortByDesc('created_at');
         $designs = Post::designs()->get()->sortByDesc('created_at');
-        $architects = User::verified()->architects()->get();
+        $architects = User::verified()->architects()->prcVerified()->get();
 
         return view('feed', compact('posts', 'designs', 'architects'));
     }

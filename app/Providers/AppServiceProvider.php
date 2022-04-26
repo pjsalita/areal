@@ -56,5 +56,17 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('unverified', function () {
             return !optional(auth()->user())->hasVerifiedEmail();
         });
+
+        Blade::if('activated', function () {
+            return optional(auth()->user())->hasVerifiedEmail() && optional(auth()->user())->prc_verified;
+        });
+
+        Blade::if('inactivated', function () {
+            return !optional(auth()->user())->hasVerifiedEmail() || !optional(auth()->user())->prc_verified;
+        });
+
+        Blade::if('prc', function () {
+            return optional(auth()->user())->prc_verified;
+        });
     }
 }

@@ -32,7 +32,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->json(["success" => true]);
+        return response()->json([
+            "success" => true,
+            "redirect_url" => $request->user()->account_type === "admin" ? route("admin") : route("feed")
+        ]);
     }
 
     /**

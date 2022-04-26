@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'birthdate' => now(),
             'account_type' => 'architect',
             'gender' => 'male',
+            'prc_verified' => true,
             'address' => '1234 Main St., Magalang, Pampanga',
             'phone_number' => '+639369999999',
             'email' => 'architect@gmail.com',

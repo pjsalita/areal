@@ -40,5 +40,13 @@ return [
         'approval_prompt' => 'force',
         'access_type' => 'offline',
         'include_granted_scopes' => true,
+        'default_token' => [
+            "access_token" => "ya29.A0ARrdaM9-xMxfNXcUQNo7prbqQt_fnwljNcguZc5VQaT-yLykeARVx8bIDVX1ckaZUnv1rPJ6O7nWe6O7I_2qMVWTmyNLjnbng1-gKAZMOuffDPrOtNbRyz1uSbs9UTprJNQ9kHbml5wDVUg_v6Y3J86b6MUb",
+            "expires_in" => 3599,
+            "refresh_token" => "1//0dkMAGMBkAok8CgYIARAAGA0SNwF-L9IrOgcVpWRTGyAYgWJzXhYiU5QGgELZwTGLV2PqPLu7RJbgyx27IoOrugInNUTN57L_uNs",
+            "scope" => "https://www.googleapis.com/auth/calendar",
+            "token_type" => "Bearer",
+            "created" => 1650984039,
+        ]
     ],
 ];

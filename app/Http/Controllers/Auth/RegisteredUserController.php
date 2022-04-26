@@ -43,10 +43,11 @@ class RegisteredUserController extends Controller
             'account_type' => ['required', 'in:client,architect', 'max:255'],
             'gender' => ['required', 'in:male,female', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'prc_id' => ['required_if:account_type,architect', 'image'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $data = [
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
@@ -57,12 +58,27 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ];
+
+        if ($request->hasFile('prc_id')) {
+            $file = $request->file('prc_id');
+            $fileOriginalName = $file->getClientOriginalName();
+            $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . time();
+            $extension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
+            $filename = "{$name}.{$extension}";
+            $file->storeAs(config('chatify.attachments.folder'), $filename);
+            $data['prc_id'] = config('chatify.attachments.folder') . "/" . $filename;
+        }
+
+        $user = User::create($data);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return response()->json(["success" => true]);
+        return response()->json([
+            "success" => true,
+            "redirect_url" => route("feed")
+        ]);
     }
 }

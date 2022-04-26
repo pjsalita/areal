@@ -26,6 +26,13 @@ class ProfileController extends Controller
         return view('profile', compact('user'));
     }
 
+    public function resend(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back();
+    }
+
     public function edit()
     {
         $user = auth()->user();

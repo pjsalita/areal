@@ -16,11 +16,11 @@
             </div>
 
             <div class="float-right btn-group">
-                <div data-bs-toggle="dropdown">
+                {{-- <div data-bs-toggle="dropdown">
                     <button class="btn btn-link dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Get QR Code.">
                         <i class="fa fa-qrcode"></i>
                     </button>
-                </div>
+                </div> --}}
                 <div class="p-0 dropdown-menu">
                     <div class="d-flex flex-column">
                         <div class="qrcode img-thumbnail">
@@ -52,14 +52,21 @@
 
         <p class="card-text">{{ $post->body }}</p>
 
-
+        @if ($post->measurements)
+            <p>
+                <strong><small>Height:</small></strong> <small class="text-muted">{{ $post->measurements->height }}</small>
+                <strong class="ms-5"><small>Length:</small></strong> <small class="text-muted">{{ $post->measurements->length }}</small>
+                <strong class="ms-5"><small>Width:</small></strong> <small class="text-muted">{{ $post->measurements->width }}</small>
+                <strong class="ms-5"><small>Square Meters:</small></strong> <small class="text-muted">{{ $post->measurements->square_meters }}</small>
+            </p>
+        @endif
 
         @if ($post->attachments->count())
-            @foreach ($post->attachments()->models()->get() as $attachment)
+            {{-- @foreach ($post->attachments()->models()->get() as $attachment)
                 <a href="{{ $attachment->file }}" class="file-download text-decoration-none">
                     <span class="fa fa-file"></span> {{ $attachment->filename }}
                 </a>
-            @endforeach
+            @endforeach --}}
 
             <div class="row">
                 @foreach ($post->attachments()->images()->get() as $attachment)
@@ -73,29 +80,51 @@
     </div>
 
     <div class="card-footer d-flex">
-        @verified
-            @can('like', $post)
-                <a href="javascript:void(0)" onClick="like(this, {{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none">
-                    <i class="fa fa-gittip me-1"></i> Like
-                        <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
-                </a>
+        @client
+            @verified
+                @can('like', $post)
+                    <a href="javascript:void(0)" onClick="like(this, {{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none">
+                        <i class="fa fa-gittip me-1"></i> Like
+                            <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
+                    </a>
+                @else
+                    <a href="javascript:void(0)" onClick="like(this, {{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none text-danger">
+                        <i class="fa fa-gittip me-1"></i> Like
+                            <span class="ms-2 badge rounded-pill bg-danger">{{ $post->likes->count() }}</span>
+                    </a>
+                @endcan
             @else
-                <a href="javascript:void(0)" onClick="like(this, {{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none text-danger">
-                    <i class="fa fa-gittip me-1"></i> Like
-                        <span class="ms-2 badge rounded-pill bg-danger">{{ $post->likes->count() }}</span>
-                </a>
-            @endcan
-        @else
-            @auth
                 <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your email address to like and comment.">
                     <i class="fa fa-gittip me-1"></i> Like <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
                 </a>
+            @endverified
+        @endclient
+
+        @architect
+            @activated
+                @can('like', $post)
+                    <a href="javascript:void(0)" onClick="like(this, {{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none">
+                        <i class="fa fa-gittip me-1"></i> Like
+                            <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
+                    </a>
+                @else
+                    <a href="javascript:void(0)" onClick="like(this, {{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none text-danger">
+                        <i class="fa fa-gittip me-1"></i> Like
+                            <span class="ms-2 badge rounded-pill bg-danger">{{ $post->likes->count() }}</span>
+                    </a>
+                @endcan
             @else
-                <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Login or register to like and comment.">
+                <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Your email address and PRC ID must be verified to like and comment.">
                     <i class="fa fa-gittip me-1"></i> Like <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
                 </a>
-            @endauth
-        @endverified
+            @endactivated
+        @endarchitect
+
+        @guest
+            <a href="javascript:void(0)" class="card-link d-flex align-items-center text-decoration-none" style="cursor: default" data-bs-toggle="tooltip" data-bs-placement="top" title="Login or register to like and comment.">
+                <i class="fa fa-gittip me-1"></i> Like <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->likes->count() }}</span>
+            </a>
+        @endguest
 
         <a href="javascript:void(0)" onClick="toggleComment({{ $post->id }})" class="card-link d-flex align-items-center text-decoration-none">
             <i class="fa fa-comment me-1"></i> Comment <span class="ms-2 badge rounded-pill bg-secondary">{{ $post->comments->count()}}</span>
@@ -107,26 +136,45 @@
             @include("partials.feed.comment", [ 'comment' => $comment ])
         @endforeach
 
-        @verified
-            <form class="p-2 d-inline-flex align-items-center w-100 bg-gray" method="POST" action="{{ route("comment.store") }}" autocomplete="off">
-                @csrf
-                <img class="rounded-circle" width="45" height="45" src="{{  auth()->user()->profile_photo }}" alt="">
-                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <textarea type="text" class="mx-2 flex-grow-1 form-control" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
+        @client
+            @verified
+                <form class="p-2 d-inline-flex align-items-center w-100 bg-gray" method="POST" action="{{ route("comment.store") }}" autocomplete="off">
+                    @csrf
+                    <img class="rounded-circle" width="45" height="45" src="{{  auth()->user()->profile_photo }}" alt="">
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    <textarea type="text" class="mx-2 flex-grow-1 form-control" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
 
-                <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
-            </form>
-        @else
-            @auth
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
+                </form>
+            @else
                 <div class="p-2 bg-gray">
                     <small>Verify your email address to like and comment.</small>
                 </div>
+            @endverified
+        @endclient
+
+        @architect
+            @activated
+                <form class="p-2 d-inline-flex align-items-center w-100 bg-gray" method="POST" action="{{ route("comment.store") }}" autocomplete="off">
+                    @csrf
+                    <img class="rounded-circle" width="45" height="45" src="{{  auth()->user()->profile_photo }}" alt="">
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    <textarea type="text" class="mx-2 flex-grow-1 form-control" name="body" placeholder="Leave a comment..." rows="1" required></textarea>
+
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
+                </form>
             @else
                 <div class="p-2 bg-gray">
-                    <small>Login or register to like and comment.</small>
+                    <small>Your email address and PRC ID must be verified to like and comment.</small>
                 </div>
-            @endauth
-        @endverified
+            @endactivated
+        @endarchitect
+
+        @guest
+            <div class="p-2 bg-gray">
+                <small>Login or register to like and comment.</small>
+            </div>
+        @endguest
     </div>
 </div>
 

@@ -127,11 +127,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="column">
+                                    <div id="signup-prc-id-block" class="input-block" style="display: none">
+                                        <label for="signup-prc-id">PRC ID</label>
+                                        <input id="signup-prc-id" name="prc_id" type="file" tabindex="12">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="text-center input-block">
                                 <label id="register-error" class="!text-red-400"></label>
                             </div>
                         </fieldset>
-                        <button id="register-submit" type="submit" class="action secondary" tabindex="11">SIGN UP</button>
+                        <button id="register-submit" type="submit" class="action secondary" tabindex="13">SIGN UP</button>
                     </form>
                 </div>
             </div>

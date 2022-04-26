@@ -63,6 +63,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return "{$this->first_name} {$middle_name}{$this->last_name}";
     }
 
+    public function getDesignsAttribute() {
+        return $this->posts()->designs()->get();
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'desc');

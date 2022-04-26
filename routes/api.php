@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DesignController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/designs', [DesignController::class, 'index']);
-Route::get('/designs/{id}', [DesignController::class, 'show']);
+Route::get('/designs', [ApiController::class, 'designs']);
+Route::get('/userDesigns', [ApiController::class, 'userDesigns']);
+Route::get('/userDesigns/{user}', [ApiController::class, 'userDesign']);
+Route::get('/designs/{id}', [ApiController::class, 'design']);

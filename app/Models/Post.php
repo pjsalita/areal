@@ -20,7 +20,12 @@ class Post extends Model implements Likeable
         'type',
     ];
 
-    protected $appends = ['model', 'image'];
+    protected $appends = ['model', 'image', 'architect_name'];
+
+    public function getArchitectNameAttribute()
+    {
+        return $this->user->name;
+    }
 
     public function getModelObjectAttribute()
     {

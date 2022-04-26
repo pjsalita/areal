@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     Route::post('/like', [LikeController::class, 'like'])->name('like');
-    Route::delete('/like', [LikeController::class, 'unlike'])->name('like');
+    Route::delete('/like', [LikeController::class, 'unlike'])->name('like.delete');
 });
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

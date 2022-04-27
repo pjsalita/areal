@@ -53,12 +53,12 @@
                         </div>
                     </div>
                     <div class="mb-2 input-group">
-                        <input type="file" name="model" class="form-control" id="designFile" accept=".obj" required>
-                        <label class="input-group-text" for="designFile">Model File</label>
+                        <input type="file" name="model" class="form-control" id="designFile" accept=".zip,.obj" required>
+                        <label class="input-group-text" for="designFile">Model Files (.zip)</label>
                     </div>
                     <div class="input-group">
                         <input type="file" name="image" class="form-control" id="designImage" onchange="previewImage(event)" accept=".png,.jpg,.jpeg,.svg,.gif,.bmp" required>
-                        <label class="input-group-text" for="designImage">Image</label>
+                        <label class="input-group-text" for="designImage">Image Preview</label>
                     </div>
                 </div>
                 <div id="previewImages" class="my-2 row"></div>

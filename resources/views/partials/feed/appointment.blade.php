@@ -36,9 +36,18 @@
                 <i class="fa fa-clock-o"></i>
             @endif
         </div>
-        <div class="h7">
-            Message: {{ $appointment->message }}
-        </div>
+
+        @if ($appointment->message)
+            <div class="h7">
+                Client Message: {{ $appointment->message }}
+            </div>
+        @endif
+
+        @if ($appointment->architect_message)
+            <div class="h7">
+                Architect Message: {{ $appointment->architect_message }}
+            </div>
+        @endif
 
         <div class="mt-2 d-flex align-items-center" role="group">
             @if ($appointment->link)
@@ -60,14 +69,25 @@
                         <input type="hidden" name="status" value="approved">
                         <button type="submit" class="btn btn-success d-flex align-items-center"><i class="fa fa-check"></i></button>
                     </form>
+                    <div>
+                        <button type="button" class="btn btn-danger d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#declined-collapse-{{ $appointment->id }}"><i class="fa fa-times"></i></button>
+                    </div>
+                @endif
+            @endarchitect
+        </div>
+        <div class="collapse mt-2" id="declined-collapse-{{ $appointment->id }}">
+            <div class="card">
+                <div class="card-header">Message to client</div>
+                <div class="card-body">
                     <form action="{{ route("appointment.update", $appointment->id) }}" method="POST">
                         @csrf
                         @method("PUT")
-                        <input type="hidden" name="status" value="declined">
-                        <button type="submit" class="btn btn-danger d-flex align-items-center"><i class="fa fa-times"></i></button>
+                        <input type="hidden" name="status" value="declined" />
+                        <textarea name="architect_message" class="form-control mb-2"></textarea>
+                        <button type="submit" class="btn btn-danger d-flex align-items-center">Decline</button>
                     </form>
-                @endif
-            @endarchitect
+                </div>
+            </div>
         </div>
     </div>
 </div>

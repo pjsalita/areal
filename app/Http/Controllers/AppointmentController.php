@@ -124,6 +124,8 @@ class AppointmentController extends Controller
             } catch (\Throwable $th) {
                 $appointment->link = $this->generateEventLink($request, $appointment, true);
             }
+        } else {
+            $appointment->architect_message = $request->architect_message;
         }
 
         $appointment->status = $request->status;
@@ -149,11 +151,11 @@ class AppointmentController extends Controller
         $google = new Google();
 
         if ($useDefault) {
-            $service = $google->connectUsing($request->user()->google_token)->service('Calendar');
-            $event = $google->connectUsing($request->user()->google_token)->service('Calendar_Event');
-        } else {
             $service = $google->connectUsing(config('services.google.default_token'))->service('Calendar');
             $event = $google->connectUsing(config('services.google.default_token'))->service('Calendar_Event');
+        } else {
+            $service = $google->connectUsing($request->user()->google_token)->service('Calendar');
+            $event = $google->connectUsing($request->user()->google_token)->service('Calendar_Event');
         }
 
         $event->summary = 'AReal Appointment';

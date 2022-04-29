@@ -16,6 +16,7 @@ class Appointment extends Model
         'start_date',
         'end_date',
         'message',
+        'architect_message',
         'status',
     ];
 

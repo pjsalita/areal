@@ -1283,10 +1283,20 @@ $(document).ready(function () {
       "jpeg",
       "png",
       "gif",
+      "bmp",
+      "mp4",
       "zip",
       "rar",
       "txt",
-      "obj"
+      "obj",
+      'pdf',
+      'doc',
+      'docx',
+      'pptx',
+      'ppt',
+      'xls',
+      'cls',
+      'clsx',
     ];
     const sizeLimit = 50000000; // 50 megabyte
     const { name: fileName, size: fileSize } = file;

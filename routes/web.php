@@ -26,6 +26,14 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');

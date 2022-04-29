@@ -74,6 +74,22 @@ class PostController extends Controller
             }
         }
 
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $fileOriginalName = $image->getClientOriginalName();
+                $name = pathinfo($fileOriginalName, PATHINFO_FILENAME) . "_" . time();
+                $extension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
+                $filename = "{$name}.{$extension}";
+                $image->storeAs(config('chatify.attachments.folder'), $filename);
+                PostAttachment::create([
+                    'post_id' => $post->id,
+                    'filename' => $filename,
+                ]);
+            }
+        }
+
         return redirect()->back();
     }
 

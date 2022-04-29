@@ -149,8 +149,8 @@ class AppointmentController extends Controller
         $google = new Google();
 
         if ($useDefault) {
-            $service = $google->connectUsing(config('services.google.default_token'))->service('Calendar');
-            $event = $google->connectUsing(config('services.google.default_token'))->service('Calendar_Event');
+            $service = $google->connectUsing($request->user()->google_token)->service('Calendar');
+            $event = $google->connectUsing($request->user()->google_token)->service('Calendar_Event');
         } else {
             $service = $google->connectUsing(config('services.google.default_token'))->service('Calendar');
             $event = $google->connectUsing(config('services.google.default_token'))->service('Calendar_Event');

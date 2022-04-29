@@ -132,7 +132,7 @@
                                 <div class="column">
                                     <div id="signup-prc-id-block" class="input-block" style="display: none">
                                         <label for="signup-prc-id">PRC ID</label>
-                                        <input id="signup-prc-id" name="prc_id" type="file" tabindex="12">
+                                        <input id="signup-prc-id" name="prc_id" type="file" tabindex="12" accept=".png,.jpg,.jpeg,.gif">
                                     </div>
                                 </div>
                             </div>

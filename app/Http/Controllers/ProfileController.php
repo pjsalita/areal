@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Str;
 
 class ProfileController extends Controller
 {
@@ -55,6 +56,7 @@ class ProfileController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'bio' => ['nullable', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:255'],
             'birthdate' => ['required', 'date', 'before:today', 'max:255'],
             'gender' => ['required', 'in:male,female', 'max:255'],
@@ -89,5 +91,17 @@ class ProfileController extends Controller
         // ]);
 
         return redirect()->back()->with('success', 'Achievements successfully updated.');
+    }
+
+    public function avatar(Request $request)
+    {
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $avatar = Str::uuid() . "." . $file->getClientOriginalExtension();
+            User::where('id', auth()->user()->id)->update(['avatar' => config('chatify.user_avatar.folder') . "/" . $avatar]);
+            $file->storeAs(config('chatify.user_avatar.folder'), $avatar);
+        }
+
+        return redirect()->back()->with('success', 'Profile Picture successfully updated.');
     }
 }

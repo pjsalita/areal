@@ -71,8 +71,12 @@
             <div class="row">
                 @foreach ($post->attachments()->images()->get() as $attachment)
                     <div class="mb-4 col-6 position-relative">
-                        <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" style="max-width: 100%; max-height: 500px;" />
-                        <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
+                        @if (substr($attachment->filename, strrpos($attachment->filename, '.') + 1) === 'mp4')
+                            <video src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" style="max-width: 100%; max-height: 500px;" controls></video>
+                        @else
+                            <img src="{{ $attachment->file }}" alt="" class="img-thumbnail w-100 h-100" style="max-width: 100%; max-height: 500px;" />
+                            <a href="{{ $attachment->file }}" class="stretched-link" target="_blank"></a>
+                        @endif
                     </div>
                 @endforeach
             </div>

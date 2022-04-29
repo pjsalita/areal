@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/achievement', [ProfileController::class, 'achievement'])->name('profile.achievement');
+    Route::post('/profile/avatar', [ProfileController::class, 'avatar'])->name('profile.avatar');
 
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');

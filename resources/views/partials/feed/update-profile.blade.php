@@ -15,6 +15,10 @@
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ?? $user->last_name }}">
             </div>
+            <div class="col-md-12">
+                <label for="bio" class="form-label">Bio</label>
+                <input type="text" class="form-control" id="bio" name="bio" value="{{ old('bio') ?? $user->bio }}">
+            </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" readonly value="{{ old('email') ?? $user->email }}">
@@ -44,11 +48,14 @@
                 <label for="address" class="form-label">Address</label>
                 <input type="text" class="form-control" id="address" name="address" placeholder="" value="{{ old('address') ?? $user->address }}">
             </div>
-            <div class="col-md-6">
-                <label for="password" class="form-label">Password</label>
+            <div class="col-md-12">
+                <label class="form-label">Change Password (only fill if you want to change your password)</label>
+            </div>
+            <div class="col-md-6 mt-0">
+                <label for="password" class="form-label">New Password</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-0">
                 <label for="password_confirmation" class="form-label">Confirm Password</label>
                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
             </div>

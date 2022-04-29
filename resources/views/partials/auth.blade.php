@@ -25,8 +25,8 @@
                                     <label for="login-password">PASSWORD</label>
                                     <input id="login-password" name="password" type="password" required>
                                 </div>
-                                <label for="remember_me" class="d-inline-flex align-items-center">
-                                    <input id="remember_me" type="checkbox" class="" name="remember">
+                                <label for="remember__me" class="d-inline-flex align-items-center">
+                                    <input id="remember__me" type="checkbox" class="" name="remember">
                                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                                 </label>
                                 <div class="text-center input-block">
@@ -34,6 +34,9 @@
                                 </div>
                             </fieldset>
                             <button id="login-submit" type="submit" class="action primary btn-login">LOGIN</button>
+                            <div class="text-center">
+                                <a href="{{ route('password.request') }}">Forgot Password?</a>
+                            </div>
                         </div>
                     </form>
                 </div>

@@ -6,35 +6,35 @@ var trigger = document.querySelector('[data-role="modal-trigger"]'),
   signInModal = document.querySelector('[data-role="sign-in"]'),
   upBtn = document.querySelector(".button-up");
 
-trigger.addEventListener("click", () => {
+trigger?.addEventListener("click", () => {
   modal.classList.toggle("show-modal");
   upBtn.style.visibility = "hidden";
   document.body.classList.toggle("stop-scroll");
   console.log("Hello");
 });
 
-close.addEventListener("click", () => {
+close?.addEventListener("click", () => {
   modal.classList.toggle("show-modal");
   upBtn.style.visibility = "visible";
   document.body.classList.toggle("stop-scroll");
 });
 
-closeSignin.addEventListener("click", () => {
+closeSignin?.addEventListener("click", () => {
   signInModal.classList.toggle("show-modal");
   upBtn.style.visibility = "visible";
   document.body.classList.toggle("stop-scroll");
 });
 
-overlay.addEventListener("click", () => {
-  modal.classList.toggle("show-modal");
+overlay?.addEventListener("click", () => {
+  modal?.classList.toggle("show-modal");
   upBtn.style.visibility = "visible";
   document.body.classList.toggle("stop-scroll");
 });
 
 document.addEventListener("keydown", (event) => {
-  if (modal.classList.contains("show-modal")) {
+  if (modal?.classList?.contains("show-modal")) {
     if (event.keyCode == 27) {
-      modal.classList.toggle("show-modal");
+      modal?.classList.toggle("show-modal");
       upBtn.style.visibility = "visible";
       document.body.classList.toggle("stop-scroll");
     }

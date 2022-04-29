@@ -73,15 +73,21 @@
                 @endif
 
                 @if ($user->account_type === 'architect')
-                    <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
-                        <i class="fa fa-comments"></i>
-                    </a>
-                    @client
+                        @client
+                        <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
+                            <i class="fa fa-comments"></i>
+                        </a>
                         <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $user->id }}">
                             <i class="fa fa-calendar"></i>
                         </a>
                     @endclient
                 @endif
+
+                @admin
+                    <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
+                        <i class="fa fa-comments"></i>
+                    </a>
+                @endadmin
             </div>
         @endnotself
         @endauth

@@ -46,7 +46,7 @@ ourProjectsLink.addEventListener("click", () => {
     SmoothScroll(".our-projects", 3000, 1000);
 });
 
-aboutScroll.addEventListener("click", () => {
+aboutScroll?.addEventListener("click", () => {
     SmoothScroll(".about-app", 1000, 0);
 });
 

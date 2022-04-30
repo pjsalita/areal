@@ -37,6 +37,7 @@ Route::get('/terms', function () {
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+        Route::delete('/admin/delete/{user}', [AdminController::class, 'deleteUser'])->name('admin.delete');
         Route::post('/admin/verify/{user}', [AdminController::class, 'verifyEmail'])->name('admin.verify');
         Route::post('/admin/prc-verify/{user}', [AdminController::class, 'verifyPrc'])->name('admin.prc-verify');
         Route::post('/admin/unverify/{user}', [AdminController::class, 'unverifyEmail'])->name('admin.unverify');

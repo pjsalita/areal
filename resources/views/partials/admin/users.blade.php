@@ -2,13 +2,14 @@
 <table class="table m-0 table-striped table-hover table-sm table-responsive">
     <thead>
         <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Type</th>
-        <th scope="col">PRC ID</th>
-        <th scope="col">PRC Verified</th>
-        <th scope="col">Email Verified</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Type</th>
+            <th scope="col">PRC ID</th>
+            <th scope="col">PRC Verified</th>
+            <th scope="col">Email Verified</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -68,6 +69,15 @@
                             </button>
                         </form>
                     @endif
+                </td>
+                <td>
+                    <form action="{{ route('admin.delete', $user->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="p-0 btn">
+                            <i class="fa fa-trash text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete user"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         @endforeach

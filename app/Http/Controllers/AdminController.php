@@ -11,6 +11,7 @@ class AdminController extends Controller
     {
         $users = User::where('account_type', 'client')
             ->orWhere('account_type', 'architect')
+            ->orderBy('id', 'asc')
             ->get();
 
         return view('admin', compact('users'));
@@ -44,6 +45,13 @@ class AdminController extends Controller
     {
         $user->prc_verified = false;
         $user->save();
+
+        return back();
+    }
+
+    public function deleteUser(User $user)
+    {
+        $user->delete();
 
         return back();
     }

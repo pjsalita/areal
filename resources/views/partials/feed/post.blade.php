@@ -16,15 +16,17 @@
             </div>
 
             <div class="float-right btn-group">
-                {{-- <div data-bs-toggle="dropdown">
+                @if ($post->type === 'design')
+                <div data-bs-toggle="dropdown">
                     <button class="btn btn-link dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Get QR Code.">
                         <i class="fa fa-qrcode"></i>
                     </button>
-                </div> --}}
+                </div>
+                @endif
                 <div class="p-0 dropdown-menu">
                     <div class="d-flex flex-column">
                         <div class="qrcode img-thumbnail">
-                            {!! QrCode::size(250)->generate(url("/{$post->type}/{$post->id}")) !!}
+                            {!! QrCode::size(250)->generate($post->id) !!}
                         </div>
                         <button class="btn btn-primary" onclick="downloadQr(event, '{{ $post->title }}')">
                             Download QR Code

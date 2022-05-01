@@ -25,21 +25,21 @@
                             </button>
                         </div>
                         <ul class="dropdown-menu">
-                            {{-- <li>
+                            <li>
                                 <button class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                                     Profile QR Code
                                 </button>
                                 <div class="p-0 dropdown-menu">
                                     <div class="d-flex flex-column">
                                         <div class="qrcode img-thumbnail">
-                                            {!! QrCode::size(250)->generate(url("/profile/{$user->id}")) !!}
+                                            {!! QrCode::size(250)->generate(url("/profile/{$user->id}?view=designs")) !!}
                                         </div>
                                         <button class="btn btn-primary" onclick="downloadQr(event, '{{ $user->name }}')">
                                             Download QR Code
                                         </button>
                                     </div>
                                 </div>
-                            </li> --}}
+                            </li>
                             <li>
                                 <div data-bs-toggle="dropdown">
                                     <button class="dropdown-item dropdown-toggle">
@@ -49,7 +49,7 @@
                                 <div class="p-0 dropdown-menu">
                                     <div class="d-flex flex-column">
                                         <div class="qrcode img-thumbnail">
-                                            {!! QrCode::size(250)->generate(url("/profile/{$user->id}?view=designs")) !!}
+                                            {!! QrCode::size(250)->generate($user->id) !!}
                                         </div>
                                         <button class="btn btn-primary" onclick="downloadQr(event, '{{ $user->name }}')">
                                             Download QR Code

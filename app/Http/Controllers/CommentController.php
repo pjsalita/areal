@@ -107,6 +107,6 @@ class CommentController extends Controller
             ['data->reference_id', $comment->id]
         ])->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', "Comment successfully deleted.");
     }
 }

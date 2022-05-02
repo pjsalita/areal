@@ -132,7 +132,7 @@ class AppointmentController extends Controller
         $appointment->save();
         $appointment->client->notify(new RespondAppointment($request->user(), $appointment));
 
-        return back();
+        return redirect()->back()->with('success', "Appointment {$appointment->status}.");
     }
 
     /**

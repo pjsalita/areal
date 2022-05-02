@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
+use Storage;
 
 class AdminController extends Controller
 {
@@ -22,7 +24,7 @@ class AdminController extends Controller
         $user->email_verified_at = now();
         $user->save();
 
-        return back();
+        return redirect()->back()->with('success', 'User\'s email verification status successfully verified.');
     }
 
     public function verifyPrc(User $user)
@@ -30,7 +32,7 @@ class AdminController extends Controller
         $user->prc_verified = true;
         $user->save();
 
-        return back();
+        return redirect()->back()->with('success', 'User\'s PRC status successfully verified.');
     }
 
     public function unverifyEmail(User $user)
@@ -38,7 +40,7 @@ class AdminController extends Controller
         $user->email_verified_at = null;
         $user->save();
 
-        return back();
+        return redirect()->back()->with('success', 'User\'s email verification status successfully unverified.');
     }
 
     public function unverifyPrc(User $user)
@@ -46,13 +48,34 @@ class AdminController extends Controller
         $user->prc_verified = false;
         $user->save();
 
-        return back();
+        return redirect()->back()->with('success', 'User\'s PRC status successfully unverified.');
     }
 
     public function deleteUser(User $user)
     {
         $user->delete();
 
-        return back();
+        return redirect()->back()->with('success', 'User successfully deleted.');
+    }
+
+    public function apk()
+    {
+        $lastModified = "N/A";
+
+        if (Storage::exists('latest.apk')) {
+            $lastModified = Carbon::createFromTimestamp(Storage::lastModified('latest.apk'))->toDateTimeString();
+        }
+
+        return view('apk', compact('lastModified'));
+    }
+
+    public function apkUpload(Request $request)
+    {
+        if ($request->hasFile('apk')) {
+            $file = $request->file('apk');
+            $file->storeAs("/", "latest.apk");
+        }
+
+        return redirect()->back()->with('success', 'APK File successfully updated.');
     }
 }

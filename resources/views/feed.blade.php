@@ -7,6 +7,8 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
             <div class="col-md-{{ auth()->user()->account_type === "architect" ? "9" : "6" }}">
+                @include('partials.feed.alerts')
+
                 @architect
                     @include('partials.feed.create-post')
                 @endarchitect

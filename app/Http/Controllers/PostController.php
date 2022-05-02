@@ -90,7 +90,9 @@ class PostController extends Controller
             }
         }
 
-        return redirect()->back();
+        $type = ucFirst($post->type);
+
+        return redirect()->back()->with('success', "{$type} successfully added.");
     }
 
     /**
@@ -149,6 +151,8 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->back();
+        $type = ucFirst($post->type);
+
+        return redirect()->route('feed')->with('success', "{$type} successfully deleted.");
     }
 }

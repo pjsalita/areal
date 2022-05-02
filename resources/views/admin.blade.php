@@ -7,6 +7,8 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
             <div class="col-md-9">
+                @include('partials.feed.alerts')
+
                 <div class="card">
                     <div class="card-header border-bottom-0">Users</div>
                     <div class="p-0 card-body">

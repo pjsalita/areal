@@ -15,9 +15,15 @@
             <div class="action secondary" data-role="modal-trigger">
                 HOW TO INSTALL
             </div>
-            <div class="action primary">
-                DOWNLOAD NOW
-            </div>
+            @if (Storage::exists('latest.apk'))
+                <a href="{{ Storage::url('latest.apk') }}" class="action primary" target="_blank" style="text-decoration: none">
+                    DOWNLOAD NOW
+                </a>
+            @else
+                <div class="action primary">
+                    DOWNLOAD NOW
+                </div>
+            @endif
         </div>
     </div>
 

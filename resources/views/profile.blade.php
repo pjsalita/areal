@@ -7,6 +7,8 @@
                 @include('partials.feed.profile', [ 'user' => $user ])
             </div>
             <div class="col-md-9">
+                @include('partials.feed.alerts')
+
                 @if ($user->account_type === "architect")
                 <div class="d-flex">
                     <ul class="nav nav-pills nav-fill flex-grow-1" id="appointments">

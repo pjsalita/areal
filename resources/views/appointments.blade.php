@@ -7,6 +7,8 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ])
             </div>
             <div class="col-md-9">
+                @include('partials.feed.alerts')
+
                 @architect
                     @if (!auth()->user()->google_token)
                         <a href="{{ route("google.store") }}" class="mb-2 btn btn-primary text-decoration-none"><i class="fa fa-lock"></i> Authenticate</a>

@@ -84,12 +84,6 @@ class ProfileController extends Controller
             }
         }
 
-        // Achievement::find(auth()->id())->update([
-        //     'user_id' => auth()->id,
-        //     'name' => $request->name,
-        //     'value' => $request->value,
-        // ]);
-
         return redirect()->back()->with('success', 'Achievements successfully updated.');
     }
 

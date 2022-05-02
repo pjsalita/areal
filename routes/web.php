@@ -42,6 +42,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/admin/prc-verify/{user}', [AdminController::class, 'verifyPrc'])->name('admin.prc-verify');
         Route::post('/admin/unverify/{user}', [AdminController::class, 'unverifyEmail'])->name('admin.unverify');
         Route::post('/admin/prc-unverify/{user}', [AdminController::class, 'unverifyPrc'])->name('admin.prc-unverify');
+
+        Route::get('/admin/apk', [AdminController::class, 'apk'])->name('admin.apk');
+        Route::post('/admin/apk', [AdminController::class, 'apkUpload'])->name('admin.apk-upload');
     });
 
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');

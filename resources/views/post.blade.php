@@ -7,6 +7,8 @@
                 @include('partials.feed.profile', [ 'user' => auth()->user() ?? $post->user ])
             </div>
             <div class="col-md-9">
+                @include('partials.feed.alerts')
+
                 @include('partials.feed.post', [ 'post' => $post ])
             </div>
         </div>

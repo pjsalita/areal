@@ -16,6 +16,9 @@
                     <a class="nav-item nav-link text-decoration-none {{ request()->routeIs("admin") ? "active" : "" }}" href="{{ route("admin") }}">
                         <i class="fa fa-home"></i> <span class="d-inline d-lg-none"> Home</span>
                     </a>
+                    <a class="nav-item nav-link text-decoration-none {{ request()->routeIs("admin.apk") ? "active" : "" }}" href="{{ route("admin.apk") }}">
+                        <i class="fa fa-android"></i> <span class="d-inline d-lg-none"> Apk</span>
+                    </a>
                 @else
                     <a class="nav-item nav-link text-decoration-none {{ request()->routeIs("feed") ? "active" : "" }}" href="{{ route("feed") }}">
                         <i class="fa fa-home"></i> <span class="d-inline d-lg-none"> Feed</span>

@@ -15,7 +15,7 @@
                         <i class="fa fa-camera"></i>
                     </div>
                 </label>
-                <button class="btn btn-primary mt-2">Save</button>
+                <button class="mt-2 btn btn-primary">Save</button>
             </form>
         @else
             <img src="{{ $user->profile_photo }}" alt="" class="img-thumbnail w-100">
@@ -65,21 +65,42 @@
         @notself($user->id)
             <div class="mt-2">
                 @if ($user->account_type === 'client')
-                @architect
-                    <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
-                        <i class="fa fa-comments"></i>
-                    </a>
-                @endarchitect
+                    @architect
+                        @verified
+                            <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
+                                <i class="fa fa-comments"></i>
+                            </a>
+                        @else
+                            <a href="javascript:void(0)" id="openChat" class="card-link text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" title="Verify your email to chat architect.">
+                                <i class="fa fa-comments"></i>
+                            </a>
+                        @endverified
+                    @endarchitect
                 @endif
 
                 @if ($user->account_type === 'architect')
-                        @client
-                        <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
-                            <i class="fa fa-comments"></i>
-                        </a>
-                        <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $user->id }}">
-                            <i class="fa fa-calendar"></i>
-                        </a>
+                    @client
+                        @verified
+                            <a href="{{ route("chat") }}/{{ $user->id }}" id="openChat" class="card-link text-decoration-none">
+                                <i class="fa fa-comments"></i>
+                            </a>
+                            @if ($user->hasVerifiedEmail() && $user->prc_verified)
+                                <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $user->id }}">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                            @else
+                                <a href="javascript:void(0)" class="card-link text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" title="Architect is not verified.">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                            @endif
+                        @else
+                            <a href="javascript:void(0)" id="openChat" class="card-link text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" title="Verify your email to chat architect.">
+                                <i class="fa fa-comments"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="card-link text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" title="Verify your email to book appointment.">
+                                <i class="fa fa-calendar"></i>
+                            </a>
+                        @endverified
                     @endclient
                 @endif
 

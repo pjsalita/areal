@@ -80,9 +80,11 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="javascript:void(0)" class="add-to-favorite"><i class="fas fa-star"></i></a>
+                    @client
                     <a href="javascript:void(0)" class="book-appointment" data-bs-toggle="modal" data-bs-target="#bookAppointment">
                         <i class="fa fa-calendar"></i>
                     </a>
+                    @endclient
                     {{-- <a href="{{ route('feed') }}"><i class="fas fa-home"></i></a> --}}
                     <a href="javascript:void(0)" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>

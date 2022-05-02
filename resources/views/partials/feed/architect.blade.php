@@ -22,11 +22,20 @@
                 <div class="h7 text-muted">Office Address : Blk 10 Lot 8 Sapang matakla, Planet Namec</div>
             @endif
         </p>
-        <a href="{{ route("chat") }}/{{ $architect->id }}" id="openChat" class="card-link text-decoration-none">
-            <i class="fa fa-comments"></i>
-        </a>
-        <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $architect->id }}">
-            <i class="fa fa-calendar"></i>
-        </a>
+        @verified
+            <a href="{{ route("chat") }}/{{ $architect->id }}" id="openChat" class="card-link text-decoration-none">
+                <i class="fa fa-comments"></i>
+            </a>
+            <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#bookAppointment" onclick="$('#book-architect-id')[0].value = {{ $architect->id }}">
+                <i class="fa fa-calendar"></i>
+            </a>
+        @else
+            <a href="javascript:void(0)" id="openChat" class="card-link text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your email to chat architect.">
+                <i class="fa fa-comments"></i>
+            </a>
+            <a href="javascript:void(0)" class="card-link text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your email to book appointment.">
+                <i class="fa fa-calendar"></i>
+            </a>
+        @endverified
     </div>
 </div>

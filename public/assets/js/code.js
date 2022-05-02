@@ -397,7 +397,7 @@ function IDinfo(id, type) {
         $(".m-header-messaging .user-name").html(getMessengerId() != auth_id ? data.fetch.name : "Saved Messages");
         $(".m-header-messaging .user-name").attr("href", `/profile/${data.fetch.id}`);
 
-        if (data.fetch.account_type !== 'client' && getMessengerId() != auth_id) {
+        if (data.fetch.account_type !== 'client' && getMessengerId() != auth_id && !!data.fetch.email_verified_at && !!data.fetch.prc_verified) {
             $(".book-appointment").show();
         }
 

@@ -32,7 +32,7 @@
                                 <div class="p-0 dropdown-menu">
                                     <div class="d-flex flex-column">
                                         <div class="qrcode img-thumbnail">
-                                            {!! QrCode::size(250)->generate("url:" . url("/profile/{$user->id}?view=designs")) !!}
+                                            {!! QrCode::size(250)->generate(url("/profile/{$user->id}?view=designs")) !!}
                                         </div>
                                         <button class="btn btn-primary" onclick="downloadQr(event, '{{ $user->name }}')">
                                             Download QR Code

@@ -18,7 +18,7 @@
             <div class="float-right btn-group">
                 @if ($post->type === 'design')
                 <div data-bs-toggle="dropdown">
-                    <button class="btn btn-link dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Get QR Code.">
+                    <button class="btn btn-link dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Get QR Code.">
                         <i class="fa fa-qrcode"></i>
                     </button>
                 </div>

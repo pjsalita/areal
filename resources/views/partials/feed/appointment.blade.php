@@ -50,7 +50,7 @@
         @endif
 
         <div class="mt-2 d-flex align-items-center" role="group">
-            @if ($appointment->link)
+            @if ($appointment->link && Carbon\Carbon::parse($appointment->end_date)->isFuture())
                 <a href="{{ $appointment->link }}" target="_blank" class="text-decoration-none btn btn-success d-flex align-items-center me-md-2">
                     <i class="fa fa-phone me-2"></i> Join Call
                 </a>

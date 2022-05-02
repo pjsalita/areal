@@ -26,7 +26,7 @@
                 <div class="p-0 dropdown-menu">
                     <div class="d-flex flex-column">
                         <div class="qrcode img-thumbnail">
-                            {!! QrCode::size(250)->generate($post->id) !!}
+                            {!! QrCode::size(250)->generate("userDesign:" . $post->id) !!}
                         </div>
                         <button class="btn btn-primary" onclick="downloadQr(event, '{{ $post->title }}')">
                             Download QR Code

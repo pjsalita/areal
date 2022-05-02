@@ -1,5 +1,5 @@
 
-<table class="table m-0 table-striped table-hover table-sm table-responsive">
+<table class="table m-0 table-striped table-hover table-bordered table-sm table-responsive">
     <thead>
         <tr>
             <th scope="col">ID</th>

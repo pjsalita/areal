@@ -11,7 +11,7 @@
 
                 <div class="card">
                     <div class="card-header border-bottom-0">Users</div>
-                    <div class="p-0 card-body">
+                    <div class="card-body">
                         @include('partials.admin.users', compact('users'))
                     </div>
                 </div>

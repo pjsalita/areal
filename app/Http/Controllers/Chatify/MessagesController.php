@@ -89,6 +89,8 @@ class MessagesController extends Controller
                 $fetch = User::where('id', $request['id'])->where('account_type', 'architect')->first();
             } else if ($request->user()->account_type === "architect") {
                 $fetch = User::where('id', $request['id'])->where('account_type', 'client')->first();
+            } else {
+                $fetch = User::where('id', $request['id'])->first();
             }
             if($fetch){
                 // $userAvatar = asset('/storage/' . config('chatify.user_avatar.folder') . '/' . $fetch->avatar);

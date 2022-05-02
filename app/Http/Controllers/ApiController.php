@@ -62,4 +62,13 @@ class ApiController extends Controller
 
         return response()->json($designs);
     }
+
+    public function userDesignIds(User $user)
+    {
+        $designs = $user->posts()->designs()->get()->map(function ($design) {
+            return $design->only(['id']);
+        })->flatten();
+
+        return response()->json($designs);
+    }
 }

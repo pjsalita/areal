@@ -122,7 +122,8 @@ class AppointmentController extends Controller
             try {
                 $appointment->link = $this->generateEventLink($request, $appointment);
             } catch (\Throwable $th) {
-                $appointment->link = $this->generateEventLink($request, $appointment, true);
+                return redirect()->back()->with('success', "Failed creating a Google Calendar event, please try reauthenticating.");
+                // $appointment->link = $this->generateEventLink($request, $appointment, true);
             }
         } else {
             $appointment->architect_message = $request->architect_message;

@@ -13,3 +13,9 @@
         {{ session()->get('success') }}
     </div>
 @endif
+
+@if (session()->has('error'))
+    <div class="mb-2 alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif

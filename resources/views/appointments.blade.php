@@ -12,6 +12,8 @@
                 @architect
                     @if (!auth()->user()->google_token)
                         <a href="{{ route("google.store") }}" class="mb-2 btn btn-primary text-decoration-none"><i class="fa fa-lock"></i> Authenticate</a>
+                    @else
+                        <a href="{{ route("google.store") }}" class="mb-2 btn btn-primary text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Reauthenticate if you have problem approving your appointments."><i class="fa fa-lock"></i> Reauthenticate</a>
                     @endif
                 @endarchitect
 

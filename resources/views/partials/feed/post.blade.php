@@ -17,6 +17,16 @@
 
             <div class="float-right btn-group">
                 @if ($post->type === 'design')
+                    @self($post->user->id)
+                        <form action="{{ route("post.update", $post->id) }}" method="POST">
+                            @csrf
+                            @method("PUT")
+                            <button type="submit" class="btn text-primary btn-link" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to make {{ $post->is_private ? 'public' : 'private' }}.">
+                                <i class="fa fa-{{ $post->is_private ? 'lock' : 'globe' }}"></i>
+                            </button>
+                        </form>
+                    @endself
+
                 <div data-bs-toggle="dropdown">
                     <button class="btn btn-link dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Get QR Code.">
                         <i class="fa fa-qrcode"></i>

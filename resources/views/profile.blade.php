@@ -75,7 +75,9 @@
                     </div>
                     <div class="tab-pane fade {{ request()->view === "designs" ? "show active" : "" }}" id="designsTab">
                         @forelse ($user->posts()->designs()->get() as $post)
-                            @include('partials.feed.post', [ 'post' => $post ])
+                            @if (!$post->is_private || $post->user_id === auth()->id())
+                                @include('partials.feed.post', [ 'post' => $post ])
+                            @endif
                         @empty
                             <div class="text-center">
                                 <p>No designs available.</p>

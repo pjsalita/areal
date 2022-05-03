@@ -19,6 +19,7 @@ class Post extends Model implements Likeable
         'body',
         'type',
         'measurements',
+        'is_private',
     ];
 
     protected $appends = ['model', 'image', 'architect_name'];
@@ -88,5 +89,15 @@ class Post extends Model implements Likeable
     public function scopeDesigns($query)
     {
         return $query->where('type', 'design');
+    }
+
+    public function scopePrivate($query)
+    {
+        return $query->where('is_private', true);
+    }
+
+    public function scopePublic($query)
+    {
+        return $query->where('is_private', false);
     }
 }

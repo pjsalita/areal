@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/avatar', [ProfileController::class, 'avatar'])->name('profile.avatar');
 
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
+    Route::put('/post/{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');

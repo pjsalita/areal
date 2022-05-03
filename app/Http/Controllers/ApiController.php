@@ -10,7 +10,7 @@ class ApiController extends Controller
 {
     public function designs()
     {
-        $designs = Post::designs()->get();
+        $designs = Post::designs()->public()->get();
         $designs = $designs->map(function ($design) {
             return $design->only(['id', 'user_id', 'architect_name', 'title', 'measurements', 'model', 'image', 'created_at']);
         });
@@ -35,7 +35,7 @@ class ApiController extends Controller
     {
         $users = User::architects()->get();
         $users = $users->map(function ($user) {
-            $designs = $user->posts()->designs()->get()->map(function ($design) {
+            $designs = $user->posts()->designs()->public()->get()->map(function ($design) {
                 return $design->only(['id', 'title', 'measurements', 'model', 'image', 'created_at']);
             });
 
@@ -56,7 +56,7 @@ class ApiController extends Controller
 
     public function userDesign(User $user)
     {
-        $designs = $user->posts()->designs()->get()->map(function ($design) {
+        $designs = $user->posts()->designs()->public()->get()->map(function ($design) {
             return $design->only(['id', 'user_id', 'architect_name', 'title', 'measurements', 'model', 'image', 'created_at']);
         });
 
@@ -65,7 +65,7 @@ class ApiController extends Controller
 
     public function userDesignIds(User $user)
     {
-        $designs = $user->posts()->designs()->get()->map(function ($design) {
+        $designs = $user->posts()->designs()->public()->get()->map(function ($design) {
             return $design->only(['id']);
         })->flatten();
 

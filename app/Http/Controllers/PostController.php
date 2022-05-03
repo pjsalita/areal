@@ -44,6 +44,7 @@ class PostController extends Controller
             'body' => $request->body,
             'type' => $request->type,
             'measurements' => $request->measurements,
+            'is_private' => !!$request->is_private,
         ]);
 
         $time = time();
@@ -110,6 +111,7 @@ class PostController extends Controller
     public function design(Post $post)
     {
         abort_if($post->type !== "design", 404);
+        abort_if($post->is_private && $post->user_id !== auth()->id(), 404);
         return view('post', compact('post'));
     }
 
@@ -133,7 +135,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $type = ucFirst($post->type);
+        $privacy = $post->is_private ? "public" : "private";
+
+        $post->is_private = !$post->is_private;
+        $post->save();
+
+        return redirect()->back()->with('success', "{$type} is set to {$privacy}.");
     }
 
     /**

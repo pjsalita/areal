@@ -23,7 +23,7 @@
                 <input type="hidden" name="type" value="post">
                 <div class="form-group">
                     <input class="mb-2 form-control" name="title" placeholder="Subject" required/>
-                    <textarea class="form-control mb-2" name="body" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                    <textarea class="mb-2 form-control" name="body" id="message" rows="3" placeholder="What are you thinking?"></textarea>
                 </div>
                 <div class="input-group">
                     <input type="file" name="images[]" class="form-control" id="postAttachments" onchange="previewImage(event, 'postPreviews')" accept=".png,.jpg,.jpeg,.gif,.bmp,.mp4" multiple>
@@ -61,9 +61,13 @@
                         <input type="file" name="model" class="form-control" id="designFile" accept=".zip,.obj" required>
                         <label class="input-group-text" for="designFile">Model Files (.zip)</label>
                     </div>
-                    <div class="input-group">
+                    <div class="mb-2 input-group">
                         <input type="file" name="image" class="form-control" id="designImage" onchange="previewImage(event, 'designPreviews')" accept=".png,.jpg,.jpeg,.gif,.bmp" required>
                         <label class="input-group-text" for="designImage">Image Preview</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" name="is_private" id="is_private">
+                      <label class="form-check-label" for="is_private">Private</label>
                     </div>
                 </div>
                 <div id="designPreviews" class="my-2 row"></div>

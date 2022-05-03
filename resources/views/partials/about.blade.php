@@ -15,8 +15,8 @@
             <div class="action secondary" data-role="modal-trigger">
                 HOW TO INSTALL
             </div>
-            @if (Storage::exists('latest.apk'))
-                <a href="{{ Storage::url('latest.apk') }}" class="action primary" target="_blank" style="text-decoration: none">
+            @if (Storage::exists('AReal_Latest.apk'))
+                <a href="{{ Storage::url('AReal_Latest.apk') }}" class="action primary" target="_blank" style="text-decoration: none">
                     DOWNLOAD NOW
                 </a>
             @else

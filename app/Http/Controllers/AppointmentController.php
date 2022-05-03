@@ -119,12 +119,12 @@ class AppointmentController extends Controller
     public function update(Request $request, Appointment $appointment)
     {
         if ($request->status === 'approved') {
-            try {
+            // try {
                 $appointment->link = $this->generateEventLink($request, $appointment);
-            } catch (\Throwable $th) {
-                return redirect()->back()->with('error', "Failed creating a Google Calendar event, please try reauthenticating.");
+            // } catch (\Throwable $th) {
+                // return redirect()->back()->with('error', "Failed creating a Google Calendar event, please try reauthenticating.");
                 // $appointment->link = $this->generateEventLink($request, $appointment, true);
-            }
+            // }
         } else {
             $appointment->architect_message = $request->architect_message;
         }

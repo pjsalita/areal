@@ -62,8 +62,8 @@ class AdminController extends Controller
     {
         $lastModified = "N/A";
 
-        if (Storage::exists('latest.apk')) {
-            $lastModified = Carbon::createFromTimestamp(Storage::lastModified('latest.apk'))->toDateTimeString();
+        if (Storage::exists('AReal_Latest.apk')) {
+            $lastModified = Carbon::createFromTimestamp(Storage::lastModified('AReal_Latest.apk'))->toDateTimeString();
         }
 
         return view('apk', compact('lastModified'));
@@ -73,7 +73,7 @@ class AdminController extends Controller
     {
         if ($request->hasFile('apk')) {
             $file = $request->file('apk');
-            $file->storeAs("/", "latest.apk");
+            $file->storeAs("/", "AReal_Latest.apk");
         }
 
         return redirect()->back()->with('success', 'APK File successfully updated.');

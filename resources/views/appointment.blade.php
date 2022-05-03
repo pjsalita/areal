@@ -1,4 +1,4 @@
-@section('title', "Appointment #" . Str::ucfirst($appointment->id))
+@section('title', "Appointment")
 
 <x-app-layout>
     <div class="my-3 container-fluid">

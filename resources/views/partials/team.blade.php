@@ -9,27 +9,17 @@
             <div class="card-wrapper" data-aos="fade-up" data-aos-duration="500">
                 <div class="card">
                     <div class="card-image">
-                        <img src="{{ asset("https://image.ibb.co/dUTfmJ/profile_img.jpg") }}" alt="profile one">
+                        <img src="{{ asset("/assets/images/elison.png") }}" alt="profile one">
                     </div>
                     <ul class="social-icons">
                         <li>
-                            <a href="#">
+                            <a href="https://www.facebook.com/aeron.elison" target="_blank">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-dribbble"></i>
+                            <a href="https://www.linkedin.com/in/aeron-justin-elison-8174041b6/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
                             </a>
                         </li>
                     </ul>
@@ -46,27 +36,17 @@
             <div class="card-wrapper" data-aos="fade-up" data-aos-duration="1000">
                 <div class="card">
                     <div class="card-image">
-                        <img src="{{ asset("https://image.ibb.co/dUTfmJ/profile_img.jpg") }}" alt="profile one">
+                        <img src="{{ asset("/assets/images/iwamoto.png") }}" alt="profile one">
                     </div>
                     <ul class="social-icons">
                         <li>
-                            <a href="#">
+                            <a href="https://www.facebook.com/iwamotolisav" target="_blank">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-dribbble"></i>
+                            <a href="https://www.linkedin.com/in/lisa-iwamoto-136b751b3/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
                             </a>
                         </li>
                     </ul>
@@ -83,27 +63,17 @@
             <div class="card-wrapper" data-aos="fade-up" data-aos-duration="1500">
                 <div class="card">
                     <div class="card-image">
-                        <img src="{{ asset("https://image.ibb.co/dUTfmJ/profile_img.jpg") }}" alt="profile one">
+                        <img src="{{ asset("/assets/images/licup.png") }}" alt="profile one">
                     </div>
                     <ul class="social-icons">
                         <li>
-                            <a href="#">
+                            <a href="https://www.facebook.com/ArleyLicup" target="_blank">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-dribbble"></i>
+                            <a href="https://www.linkedin.com/in/arleylicup/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
                             </a>
                         </li>
                     </ul>

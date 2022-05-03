@@ -2,8 +2,8 @@
 <footer>
     <div class="contact-me">
         <h3 class="title">Contact Information</h3>
-        <p><i class="fa-solid fa-envelope"></i> : arealapp@gmail.com</p>
-        <p><i class="fa-solid fa-address-book"></i> : +63 977 123 7892</p>
+        <p><i class="fa-solid fa-envelope"></i> : arealwebapp@gmail.com</p>
+        <p><i class="fa-solid fa-address-book"></i> : +63 928 635 5937</p>
 
         <p>
             <i class="fa-solid fa-location-dot"></i> : Balibago, Angeles City, Pampanga
@@ -18,7 +18,7 @@
         </p>
     </div>
     <div class="follow-me">
-        <h3 class="title">Follow us on</h3>
+        {{-- <h3 class="title">Follow us on</h3>
         <ul class="link-list">
             <li>
                 <a href="#">Facebook</a>
@@ -26,7 +26,7 @@
             <li>
                 <a href="#">Instagram</a>
             </li>
-        </ul>
+        </ul> --}}
     </div>
     <div class="developer-brand">
         <p><i class="fa-solid fa-copyright"></i>AReal App Developers</p>

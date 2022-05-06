@@ -42,9 +42,9 @@ class AppointmentController extends Controller
         $historyAppointments = Appointment::where($isClient ? 'user_id' : 'architect_id', auth()->id())
             ->where(function ($q) {
                 $q->where('start_date', '<=', Carbon::now())
-                    ->where('end_date', '<=', Carbon::now());
+                    ->where('end_date', '<=', Carbon::now())
+                    ->orWhere('status', 'declined');
             })
-            ->orWhere('status', 'declined')
             ->orderBy('end_date', 'desc')
             ->get();
 

@@ -23,6 +23,7 @@
                                 <label class="input-group-text" for="apk">APK File</label>
                             </div>
                             <button class="btn btn-primary" type="submit">Upload</button>
+			    <a href="{{ route('admin.apk-delete') }}" class="btn btn-danger text-decoration-none ms-1">Delete APK</a>
                         </form>
                     </div>
                 </div>

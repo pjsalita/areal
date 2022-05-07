@@ -78,4 +78,13 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'APK File successfully updated.');
     }
+
+    public function apkDelete(Request $request)
+    {
+        if (Storage::exists('AReal_Latest.apk')) {
+		Storage::delete('AReal_Latest.apk');
+        }
+
+        return redirect()->back()->with('success', 'APK File successfully deleted.');
+    }
 }

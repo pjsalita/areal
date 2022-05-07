@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/admin/apk', [AdminController::class, 'apk'])->name('admin.apk');
         Route::post('/admin/apk', [AdminController::class, 'apkUpload'])->name('admin.apk-upload');
+        Route::get('/admin/apk-delete', [AdminController::class, 'apkDelete'])->name('admin.apk-delete');
     });
 
     Route::get('/feed', [FeedController::class, 'index'])->name('feed');

@@ -16,18 +16,20 @@
             const msgChannel = pusher.subscribe("private-chatify");
 
             msgChannel.bind("messaging", (notification) => {
-                const messagesCount = document.getElementById('messagesCount');
-                const notificationContainer = document.getElementById('notificationToast');
-                const template = notificationTemplate(notification);
-                const element = document.createElement('div');
-                element.innerHTML = template;
-                notificationContainer.appendChild(element.firstChild);
-                const toast = new bootstrap.Toast(notificationContainer.lastChild);
+                if (notification.to_id == {{ auth()->id() }}) {
+                    const messagesCount = document.getElementById('messagesCount');
+                    const notificationContainer = document.getElementById('notificationToast');
+                    const template = notificationTemplate(notification);
+                    const element = document.createElement('div');
+                    element.innerHTML = template;
+                    notificationContainer.appendChild(element.firstChild);
+                    const toast = new bootstrap.Toast(notificationContainer.lastChild);
 
-                if (messagesCount) {
-                    messagesCount.innerText = parseInt(messagesCount.innerText || 0) + 1;
+                    if (messagesCount) {
+                        messagesCount.innerText = parseInt(messagesCount.innerText || 0) + 1;
+                    }
+                    toast.show();
                 }
-                toast.show();
             });
         @endif
 

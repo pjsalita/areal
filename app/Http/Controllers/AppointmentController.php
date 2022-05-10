@@ -9,6 +9,8 @@ use App\Notifications\RespondAppointment;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Services\Google;
+use App\Jobs\AppointmentReminder;
+use App\Jobs\AppointmentExpirationReminder;
 
 class AppointmentController extends Controller
 {
@@ -79,8 +81,13 @@ class AppointmentController extends Controller
             'end_date' => Carbon::parse($dates[1]),
         ]);
 
-        $architect = User::find($request->architect_id);
-        $architect->notify(new RequestAppointment($request->user(), $appointment));
+        $appointment->architect->notify(new RequestAppointment($request->user(), $appointment));
+
+        AppointmentReminder::dispatch($appointment)
+            ->delay(Carbon::now()->addMinutes(15));
+        AppointmentExpirationReminder::dispatch($appointment)
+            ->delay(Carbon::parse($appointment->start_date)->subMinutes(15));
+
 
         return response()->json([ 'success' => true, 'appointment_id' => $appointment->id ]);
     }

@@ -65,7 +65,7 @@ class ArchitectAppointmentExpirationReminder extends Notification
             'parent_id' => $this->appointment->id,
             'reference_id' => $this->appointment->id,
             'reference_link' => route("appointment.show", $this->appointment->id),
-            'message' => "You still have not responded to the booking of your client {$this->appointment->client->name}.\nThe appointment will expire within 15 minutes.\nPlease click here to respond.",
+            'message' => "You still have not responded to the booking of your client {$this->appointment->client->name}. The appointment will expire within 15 minutes. Please click here to respond.",
         ];
     }
 }

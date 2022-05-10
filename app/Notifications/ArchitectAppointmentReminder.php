@@ -64,7 +64,7 @@ class ArchitectAppointmentReminder extends Notification
             'parent_id' => $this->appointment->id,
             'reference_id' => $this->appointment->id,
             'reference_link' => route("appointment.show", $this->appointment->id),
-            'message' => "You still have not responded to the booking of your client {$this->appointment->client->name}.\nPlease click here to respond.",
+            'message' => "You still have not responded to the booking of your client {$this->appointment->client->name}. Please click here to respond.",
         ];
     }
 }

@@ -36,7 +36,7 @@ class AppointmentExpirationReminder implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->appointment->status === 'pending' && Carbon::parse($this->appointment->start_date)->isPast()) {
+        if ($this->appointment->status === 'pending' && Carbon::parse($this->appointment->start_date)->isFuture()) {
             $this->appointment->client->notify(new ClientNotification($this->appointment));
             $this->appointment->architect->notify(new ArchitectNotification($this->appointment));
         }

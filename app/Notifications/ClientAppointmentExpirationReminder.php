@@ -64,7 +64,7 @@ class ClientAppointmentExpirationReminder extends Notification
             'parent_id' => $this->appointment->id,
             'reference_id' => $this->appointment->id,
             'reference_link' => route("appointment.show", $this->appointment->id),
-            'message' => "{$this->appointment->architect->name} has not yet responded to your booking.\nIf not approved within 15 minutes, you may look for another architect.",
+            'message' => "{$this->appointment->architect->name} has not yet responded to your booking. If not approved within 15 minutes, you may look for another architect.",
         ];
     }
 }
